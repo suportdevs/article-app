@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+Route::post('/admin/tags/delete', [TagController::class, 'delete'])->name('admin.tags.delete');
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
     Route::resource('/tags', TagController::class);
 });

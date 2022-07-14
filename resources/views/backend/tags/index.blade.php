@@ -1,6 +1,4 @@
 <x-admin-layout>
-<div class="main-panel">
-  <div class="content-wrapper">
   
   <x-breadcrumbs :title="$page_title">
     <a href="{{ route('admin.dashboard') }}" class="text-sm text-dark text-decoration-none py-0 ">Home > </a>
@@ -11,14 +9,15 @@
       <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <div class="d-block text-center">
+            <div class="d-block text-center mb-4">
               <div>
                 <a href="{{ route('admin.tags.create') }}" class="btn btn-success btn-sm px-1 py-1"><span class="mdi mdi-plus"></span> New</a>
+                <button class="btn btn-danger btn-sm px-1 py-1" id="deleteMultiple" disabled>Delete</button>
               </div>
             </div>
             <div class="d-block">
               <div class="row">
-                <form action="{{ route('admin.tags.index') }}" method="POST" id="searchForm">
+                <form action="{{ route('admin.tags.index') }}" method="get" id="searchForm">
                   @csrf
                   <div class="input-group mb-3">
                     <div class="col-md-1">
@@ -33,15 +32,17 @@
                     </div>
                     <div class="col-md-2">
                       <button type="submit" class="btn btn-primary">Search</button>
-                      <button type="rest" class="btn btn-warning">Clear</button>
+                      <button type="rest" id="clear" class="btn btn-warning">Clear</button>
                     </div>
                   </div>
                 </form>
               </div>
             </div>
-            <div id="ajaxContent-wraper">
-              @include('backend.tags._list')
-            </div>
+            <form action="{{ route('admin.tags.delete') }}" method="POST" id="formList">
+              <div id="ajaxContent-wraper" class="table-responsive">
+                @include('backend.tags._list')
+              </div>
+            </form>
           </div>
           <div class="text-center mx-auto">
           {{ $dataset->links() }}
@@ -49,17 +50,4 @@
         </div>
       </div>
     </div>
-  </div>
-  <!-- content-wrapper ends -->
-  <!-- partial:partials/_footer.html -->
-  <footer class="footer">
-    <div class="footer-inner-wraper">
-      <div class="d-sm-flex justify-content-center justify-content-sm-between py-2">
-        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © <a href="https://www.bootstrapdash.com/" target="_blank">bootstrapdash.com </a>2021</span>
-        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Only the best <a href="https://www.bootstrapdash.com/" target="_blank"> Bootstrap dashboard </a> templates</span>
-      </div>
-    </div>
-  </footer>
-  <!-- partial -->
-</div>
 </x-admin-layout>

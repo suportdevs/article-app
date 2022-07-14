@@ -10,13 +10,12 @@ class Tag extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name', 'slug'];
+    protected $fillable = ['name', 'slug', 'created_by', 'updated_by', '_key'];
 
     public function scopeFilter($query, $filters)
     {
         $query->when($filters->tag_name ?? false, function($query, $name)
         {
-            dd($name);
             $query->where('name', 'like', '%' . trim($name) . '%');
         });
     }

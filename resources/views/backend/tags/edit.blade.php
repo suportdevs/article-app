@@ -4,7 +4,7 @@
   <x-breadcrumbs :title="$page_title">
     <a href="{{ route('admin.dashboard') }}" class="text-sm text-dark text-decoration-none py-0 ">Home > </a>
     <a href="{{ route('admin.tags.index') }}" class="text-sm text-dark text-decoration-none py-0 "> Tags > </a>
-    <a > Create</a>
+    <a > Edit</a>
   </x-breadcrumbs>
 
     <div class="row">
@@ -23,16 +23,17 @@
             @endif
             <div class="d-flex justify-content-between align-items-center">
               <div>
-                <h4 class="text-black m-0"><b>Tags</b> Create Table List</h4>
+                <h4 class="text-black m-0"><b>Tags</b> Edit Table List</h4>
                 <span class="text-sm">Tags Management Database</span>
               </div>
             </div>
             <div class="card-content mt-4">
-                <form action="{{ route('admin.tags.store') }}" method="POST" class="forms-sample">
+                <form action="{{ route('admin.tags.update', $data->id ) }}" method="POST" class="forms-sample">
                     @csrf
-                <div class="form-group">
-                    <label for="name" class="text-dark">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+                    @method('PUT')
+                    <div class="form-group">
+                        <label for="name" class="text-dark">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ $data->name }}" required>
                     </div>
                     <button type="submit" class="btn btn-primary bg-primary">Submit</button>
                 </form>
