@@ -23,7 +23,7 @@ class TagController extends Controller
         $view = $request->ajax() ? "backend.tags._list" : "backend.tags.index";
         return view($view, [
             'page_title' => 'Tags',
-            'dataset' => Tag::filter($request)->paginate(2)
+            'dataset' => Tag::filter($request)->paginate($paginateCount)
         ]);
     }
 
@@ -140,7 +140,7 @@ class TagController extends Controller
         DB::beginTransaction();
         try{
             foreach($request->data as $key){
-                $data = Tag::where('_key', $key)->first();
+                $data = Tag::where('_key', $key)->firstOrFail();
                 $data->delete();
             }
             DB::commit();

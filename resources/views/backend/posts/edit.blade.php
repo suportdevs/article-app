@@ -3,8 +3,8 @@
   
   <x-breadcrumbs :title="$page_title">
     <a href="{{ route('admin.dashboard') }}" class="text-sm text-dark text-decoration-none py-0 ">Home > </a>
-    <a href="{{ route('admin.tags.index') }}" class="text-sm text-dark text-decoration-none py-0 "> Tags > </a>
-    <a > Create</a>
+    <a href="{{ route('admin.category.index') }}" class="text-sm text-dark text-decoration-none py-0 "> Category > </a>
+    <a > Edit</a>
   </x-breadcrumbs>
 
     <div class="row">
@@ -23,16 +23,21 @@
             @endif
             <div class="d-flex justify-content-between align-items-center mb-4">
               <div>
-                <h5 class="m-0 text-muted"><span class="fs-5 text-dark"><span class="mdi mdi-file-document-outline"></span> Tags</span> Create Table List</h5>
-                <p class="m-0">Tags Management Database</p>
+                <h5 class="m-0 text-muted"><span class="fs-5 text-dark"><span class="mdi mdi-file-document-outline"></span> Category</span> Edit Table List</h5>
+                <p class="m-0">Category Management Database</p>
               </div>
             </div>
             <div class="card-content mt-4">
-                <form action="{{ route('admin.tags.store') }}" method="POST" class="forms-sample">
+                <form action="{{ route('admin.category.update', $data->id ) }}" method="POST" class="forms-sample">
                     @csrf
-                <div class="form-group">
-                    <label for="name" class="text-dark">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+                    @method('PUT')
+                    <div class="form-group">
+                        <label for="name" class="text-dark">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ $data->name }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="text-dark">Description</label>
+                        <textarea name="description" id="description" cols="30" rows="3" value="{{ $data->description }}" class="form-control">{{ $data->description }}</textarea>
                     </div>
                     <button type="submit" class="btn btn-primary bg-primary">Submit</button>
                 </form>

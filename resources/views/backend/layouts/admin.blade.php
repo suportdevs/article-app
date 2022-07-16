@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="{{ asset('assets/vendors/select2/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/toastr/toastr.min.css') }}">
     <!-- End layout styles -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
+
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" />
   </head>
   <!-- ***** Preloader Start ***** -->
@@ -71,6 +73,8 @@
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
     <!-- End custom js for this page -->
+    @stack('scripts')
+    
     @include('backend.layouts.toastrInitial')
   </body>
 </html>
