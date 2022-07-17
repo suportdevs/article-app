@@ -6,6 +6,10 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -50,7 +54,44 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            DB::beginTransaction();
+
+            $attributes = $request->validated();
+            $attributes['slug']         = Str::slug($request->title);
+            $attributes['created_by'] = Auth::guard('admin')->user()->id;
+            $attributes['_key']         = Str::random(32);
+            Post::create($attributes);
+            
+            DB::commit();
+            return redirect()->route('admin.post.index')->with('success', 'Record inserted successfully.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Something went while inserting!');
+        }
+    }
+
+    /**
+     * Image upload by Ckeditor
+     */
+    public function imageUpload(Request $request)
+    {
+        if($request->hasFile('upload')){
+            $orginalName = $request->file('upload')->getClientOriginalName();
+            $fileName = pathinfo($orginalName, PATHINFO_FILENAME);
+            $extension = $request->file('upload')->getClientOriginalExtension();
+            $finalName = $fileName.'_'.time().'.'.$extension;
+
+            // $request->file('upload')->move(public_path('media'), $finalName);
+            $img = Image::make(public_path('media'), $finalName)->resize(1680, 1200);
+            dd($img);
+            $request->file('upload')->move(public_path('media'), $finalName);
+
+            $url = asset('media/'.$finalName);
+
+
+            return response()->json(['fileName' => $fileName, 'uploaded' => 1, 'url' => $url]);
+        }
     }
 
     /**

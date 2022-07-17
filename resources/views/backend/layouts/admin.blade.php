@@ -16,8 +16,6 @@
     <link rel="stylesheet" href="{{ asset('assets/vendors/select2/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/toastr/toastr.min.css') }}">
     <!-- End layout styles -->
-    <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
-
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" />
   </head>
   <!-- ***** Preloader Start ***** -->
@@ -68,6 +66,7 @@
     <script src="{{ asset('assets/js/off-canvas.js') }}"></script>
     <script src="{{ asset('assets/js/hoverable-collapse.js') }}"></script>
     <script src="{{ asset('assets/js/misc.js') }}"></script>
+    <script src="{{ asset('assets/vendors/ckeditor5/ckeditor.js') }}"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>

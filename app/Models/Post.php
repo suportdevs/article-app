@@ -10,7 +10,7 @@ class Post extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['category_id', 'tag_id', 'name', 'slug', 'intro', 'description', 'image', 'status', 'type', 'is_featured', 'created_by', 'updated_by'];
+    protected $fillable = ['category_id', 'tag_id', 'title', 'slug', 'intro', 'description', 'image', 'status', 'type', 'is_featured', 'created_by', 'updated_by', '_key'];
 
     public function scopeFilter($query, $fillters)
     {
