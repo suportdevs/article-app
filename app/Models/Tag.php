@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Services\ServiceTraits;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Tag extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, ServiceTraits;
 
     protected $fillable = ['name', 'slug', 'created_by', 'updated_by', '_key'];
 

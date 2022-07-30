@@ -18,13 +18,14 @@ class TagController extends Controller
      */
     public function index(Request $request)
     {
+        return Tag::getAll()->whereIn('id', [1,2]);
         // dd($request->tag_name);
-        $paginateCount = $request->item_count ?? 25;
-        $view = $request->ajax() ? "backend.tags._list" : "backend.tags.index";
-        return view($view, [
-            'page_title' => 'Tags',
-            'dataset' => Tag::filter($request)->paginate($paginateCount)
-        ]);
+        // $paginateCount = $request->item_count ?? 25;
+        // $view = $request->ajax() ? "backend.tags._list" : "backend.tags.index";
+        // return view($view, [
+        //     'page_title' => 'Tags',
+        //     'dataset' => Tag::filter($request)->paginate($paginateCount)
+        // ]);
     }
 
     /**

@@ -28,7 +28,7 @@
               </div>
             </div>
             <div class="card-content mt-4">
-                <form action="{{ route('admin.post.store') }}" method="POST" class="forms-sample">
+                <form action="{{ route('admin.post.store') }}" method="POST" class="forms-sample" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="title" class="text-dark">Title</label>
@@ -36,21 +36,21 @@
                     </div>
                     <div class="form-group">
                         <label for="intro" class="text-dark">Intro</label>
-                        <textarea name="intro" id="intro" cols="30" rows="3" class="form-control" placeholder="Write something..."></textarea>
+                        <textarea name="intro" id="intro" cols="30" rows="3" class="form-control" placeholder="Write something..." required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="description" class="text-dark">Description</label>
-                        <textarea name="description" id="editor" cols="80" rows="3" class="form-control" placeholder="Write something..." style="min-height: 150px;"></textarea>
+                        <textarea name="description" id="editor" cols="80" rows="3" class="form-control" placeholder="Write something..." style="min-height: 150px;" required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="image" class="text-dark">Fetured Image</label>
-                        <input type="file" name="image" id="image" class="form-control">
+                        <input type="file" name="image" id="image" class="form-control" required>
                     </div>
                     <div class="form-group">
                       <div class="row">
                         <div class="col-md-4">
                           <label for="category_id" class="text-dark">Category</label>
-                          <select name="category_id" id="category_id" class="form-control select2search">
+                          <select name="category_id" id="category_id" class="form-control select2search" required>
                             <option value="">Select Category</option>
                             @foreach($categories as $id => $name)
                             <option value="{{ $id }}">{{ $name }}</option>
@@ -58,8 +58,8 @@
                           </select>
                         </div>
                         <div class="col-md-4">
-                          <label for="type" class="text-dark">Fetured Image</label>
-                          <select name="type" id="type" class="form-control select2search">
+                          <label for="type" class="text-dark">Type</label>
+                          <select name="type" id="type" class="form-control select2search" required>
                             <option value="Article">Article</option>
                             <option value="News">News</option>
                             <option value="Videos">Videos</option>
@@ -68,8 +68,8 @@
                         <div class="col-md-4">
                           <label for="is_featured" class="text-dark">Is Fetured</label>
                           <select name="is_featured" id="is_featured" class="form-control select2search">
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
+                            <option value="Featured">Yes</option>
+                            <option value="Non-Featured">No</option>
                           </select>
                         </div>
                       </div>
@@ -78,7 +78,7 @@
                       <div class="row">
                         <div class="col-md-8">
                           <label for="tag_id" class="text-dark">Tags</label>
-                          <select name="tag_id[]" id="tag_id" class="form-control select2search tags" multiple="multiple">
+                          <select name="tag_id[]" id="tag_id" class="form-control select2search tags" multiple="multiple" required>
                             <option >Select Tags</option>
                             @foreach($tags as $id => $name)
                             <option value="{{ $id }}">{{ $name }}</option>
@@ -88,9 +88,9 @@
                         <div class="col-md-4">
                           <label for="status" class="text-dark">Status</label>
                           <select name="status" id="status" class="form-control select2search">
-                            <option value="Publish">Publish</option>
+                            <option value="Published">Publish</option>
                             <option value="Pending">Pending</option>
-                            <option value="Draft">Draft</option>
+                            <option value="Drafted">Draft</option>
                           </select>
                         </div>
                       </div>

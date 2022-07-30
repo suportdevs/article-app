@@ -21,7 +21,7 @@
             </div>
             <div class="d-block">
               <div class="row">
-                <form action="{{ route('admin.post.index') }}" method="get" id="searchForm">
+                <form action="{{ route('admin.post.index') }}" method="GET" id="searchForm">
                   @csrf
                   <div class="input-group mb-3">
                     <div class="col-md-1">
@@ -32,7 +32,23 @@
                       </select>
                     </div>
                     <div class="col-md-2">
-                      <input type="text" name="title" placeholder="Posts Title" class="form-control">
+                      <input type="text" name="title" placeholder="Title/Description" class="form-control">
+                    </div>
+                    <div class="col-md-2">
+                      <select name="category_id" id="category_id" class="form-control select2search">
+                        <option value="">Select Category</option>
+                        @foreach($categories as $id => $name)
+                        <option value="{{ $id }}">{{ $name }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    <div class="col-md-2">
+                      <select name="tag_id" id="tag_id" class="form-control select2search">
+                        <option value="">Select Tag</option>
+                        @foreach($tags as $id => $name)
+                        <option value="{{ $id }}">{{ $name }}</option>
+                        @endforeach
+                      </select>
                     </div>
                     <div class="col-md-2">
                       <button type="submit" class="btn btn-primary">Search</button>

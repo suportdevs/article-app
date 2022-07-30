@@ -18,13 +18,20 @@
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" />
   </head>
+
+<?php
+use App\Services\MasterService;
+$master = new MasterService();
+
+?>
+
   <!-- ***** Preloader Start ***** -->
   <div id="preloader">
         <div class="jumper">
             <div class="item"></div>
             <div class="item"></div>
             <div class="item"></div>
-            <div class="mt-5 text-dark">Loading...</div>
+            <div id="loading-text" class="mt-5 text-dark">Loading...</div>
           </div>
     </div>
     <!-- ***** Preloader End ***** -->

@@ -2,22 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         $paginateCount = $request->item_count ?? 25;
@@ -32,11 +29,6 @@ class PostController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('backend.posts.create', [
@@ -46,96 +38,135 @@ class PostController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
         try{
             DB::beginTransaction();
+            $imageUrl = '';
+            if($request->hasFile('image')){
+                $fileName = hexdec(uniqid());
+                $extension = $request->file('image')->getClientOriginalExtension();
+                $finalName = $fileName . '_' . time() . '.' . $extension;
 
-            $attributes = $request->validated();
-            $attributes['slug']         = Str::slug($request->title);
-            $attributes['created_by'] = Auth::guard('admin')->user()->id;
-            $attributes['_key']         = Str::random(32);
-            Post::create($attributes);
-            
-            DB::commit();
-            return redirect()->route('admin.post.index')->with('success', 'Record inserted successfully.');
+                $imageUrl = 'media/featured/' . $finalName;
+                
+                $attributes = $request->validated();
+                $attributes['tag_id']       = json_encode($request->tag_id);
+                $attributes['image']        = $imageUrl;
+                $attributes['slug']         = Str::slug($request->title);
+                $attributes['created_by']   = Auth::guard('admin')->user()->id;
+                $attributes['_key']         = Str::random(32);
+                Post::create($attributes);
+
+                Image::make($request->file('image'))->resize(1060, 780)->save(public_path('media/featured/') . $finalName);
+                
+                DB::commit();
+                return redirect()->route('admin.post.index')->with('success', 'Record inserted successfully.');
+            } else {
+                return back()->with('error', 'Post image required!');
+            }
+
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->with('error', 'Something went while inserting!');
+            return back()->with('error', $e->getMessage());
         }
     }
 
-    /**
-     * Image upload by Ckeditor
-     */
     public function imageUpload(Request $request)
     {
         if($request->hasFile('upload')){
-            $orginalName = $request->file('upload')->getClientOriginalName();
-            $fileName = pathinfo($orginalName, PATHINFO_FILENAME);
+            $fileName = hexdec(uniqid());
             $extension = $request->file('upload')->getClientOriginalExtension();
-            $finalName = $fileName.'_'.time().'.'.$extension;
+            $finalName = $fileName .'_'.time().'.'.$extension;
 
-            // $request->file('upload')->move(public_path('media'), $finalName);
-            $img = Image::make(public_path('media'), $finalName)->resize(1680, 1200);
-            dd($img);
-            $request->file('upload')->move(public_path('media'), $finalName);
+            Image::make($request->file('upload'))->resize(1060, 780)->save(public_path('media/') . $finalName);
+
+            // $request->file('upload')->move(public_path('media/'), $finalName);
 
             $url = asset('media/'.$finalName);
-
 
             return response()->json(['fileName' => $fileName, 'uploaded' => 1, 'url' => $url]);
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        return view('backend.posts.show', [
+            'page_title'    => 'Post Details',
+            'data'          => Post::find(decrypt($id))
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        return view('backend.posts.edit', [
+            'page_title' => 'Post',
+            'data' => Post::find(decrypt($id)),
+            'categories' => Category::pluck('name', 'id'),
+            'tags' => Tag::pluck('name', 'id')
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(StorePostRequest $request, $id)
     {
-        //
+        try{
+            DB::beginTransaction();
+            $post  = Post::find($id);
+            $imageUrl = '';
+            if($request->hasFile('image')){
+                if($request->file('image') != '' && !empty($post->image)){
+                    unlink($post->image);
+                }
+                $fileName = hexdec(uniqid());
+                $extension = $request->file('image')->getClientOriginalExtension();
+                $finalName = $fileName . '_' . time() . '.' . $extension;
+
+                $imageUrl = 'media/featured/' . $finalName;
+                
+                $attributes = $request->validated();
+                $attributes['tag_id']       = json_encode($request->tag_id);
+                $attributes['image']        = $imageUrl;
+                $attributes['slug']         = Str::slug($request->title);
+                $attributes['created_by']   = Auth::guard('admin')->user()->id;
+                $attributes['_key']         = Str::random(32);
+                $post->update($attributes);
+
+                Image::make($request->file('image'))->resize(1060, 780)->save(public_path('media/featured/') . $finalName);
+
+                DB::commit();
+                return redirect()->route('admin.post.index')->with('success', 'Record inserted successfully.');
+            } else {
+                $attributes = $request->validated();
+                $attributes['tag_id']       = json_encode($request->tag_id);
+                $attributes['slug']         = Str::slug($request->title);
+                $attributes['created_by']   = Auth::guard('admin')->user()->id;
+                $attributes['_key']         = Str::random(32);
+                $post->update($attributes);
+                
+                DB::commit();
+                return redirect()->route('admin.post.index')->with('success', 'Record inserted successfully.');
+            }
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', $e->getMessage());
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function delete(Request $request)
     {
-        //
+        DB::beginTransaction();
+        try{
+            foreach($request->data as $key){
+                $data = Post::where('_key', $key)->firstOrFail();
+                $data->delete();
+            }
+            DB::commit();
+            return "Record deleted successfull.";
+        }catch(\Exception $e){
+            DB::rollBack();
+            // return response()->json($e->getMessage(), $e->getCode());
+            return "Something went wrong while record deleting!";
+        }
     }
 }

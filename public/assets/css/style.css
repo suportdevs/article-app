@@ -15147,8 +15147,8 @@ preloader
   bottom: 0;
   position: fixed;
   z-index: 9999;
-  color: #fff;
-  opacity: .5;
+  color: #000;
+  opacity: .3;
 }
 
 #preloader .jumper {
@@ -15218,7 +15218,10 @@ preloader
     opacity: 0;
   }
 }
-
+#loading-text {
+  color: #03a10a !important;
+  opacity: 1;
+}
 /* select2search */
 .select2-container .select2-selection--single{
   height: 39px !important;
