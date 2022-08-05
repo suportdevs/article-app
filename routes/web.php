@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/admin/dashboard', function () {
+    dd(app()->name);
     return view('backend.dashboard');
 })->middleware(['admin:admin'])->name('admin.dashboard');
 

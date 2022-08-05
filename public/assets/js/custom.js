@@ -77,8 +77,7 @@ $(document).ready(function() {
                 toastr.success(response.data);
                 $("#searchForm").trigger('submit');
             }).catch((error) => {
-                console.log(error)
-                toastr.error(error);
+                toastr.error(error.response.data.message);
             })
         }
     })

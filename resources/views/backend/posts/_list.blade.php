@@ -20,12 +20,12 @@
         <td class="text-wrap algin-items-center">
             <span>{{ Str::words($data->title, 15, '...') }}</span>
             <span class="badge p-1 
-            {{ $data->status == 'Publish' ? 'bg-success' : '' }} {{ $data->status == 'Pending' ? 'bg-primary' : ''}} {{ $data->status == 'Draft' ? 'bg-worning' : '' }}
+            {{ $data->status == 'Published' ? 'bg-success' : '' }} {{ $data->status == 'Pending' ? 'bg-primary' : ''}} {{ $data->status == 'Draft' ? 'bg-worning' : '' }}
                 ">{{ $data->status }}</span>
             <span class="badge p-1 
             {{ $data->is_featured == 'Featured' ? 'badge-primary' : 'bg-warning' }}">{{ $data->is_featured }}</span>
-            <span class="badge p-1 
-            {{ $data->status == 'Publish' ? 'badge-primary' : 'bg-warning' }}">{{ $data->is_featured }}</span>
+            <!-- <span class="badge p-1 
+            {{ $data->status == 'Publish' ? 'badge-primary' : 'bg-warning' }}">{{ $data->is_featured }}</span> -->
         </td>
         <td class="text-wrap">{{ Str::words($data->intro, 20, '...')}}</td>
         <td>{{ $data->category->name ?? '' }}</td>
@@ -34,7 +34,7 @@
         <td>
             <a href="{{ route('admin.post.edit', Crypt::encrypt($data->id)) }}" class="btn btn-primary btn-sm px-1 py-1"><span class="mdi mdi-wrench"></span></a>
             <a href="{{ route('admin.post.show', Crypt::encrypt($data->id)) }}" class="btn btn-success btn-sm px-1 py-1"><span class="mdi mdi-monitor"></span></a>
-            <a href="{{ route('admin.post.publish', Crypt::encrypt($data->id)) }}" class="btn btn-info btn-sm px-1 py-1"><span class="mdi mdi-earth"></span></a>
+            <a href="{{ route('admin.post.publish', Crypt::encrypt($data->_key)) }}" class="btn btn-info btn-sm px-1 py-1"><span class="mdi mdi-earth"></span></a>
         </td>
         <td><input type="checkbox" name="data[]" value="{{ $data->_key }}" class="check_item"></td>
     </tr>

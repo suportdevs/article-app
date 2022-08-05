@@ -29,7 +29,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
 
 // Post Routes
 Route::post('/admin/post/delete', [PostController::class, 'delete'])->name('admin.post.delete');
-Route::post('/admin/post/{key}/publish', [PostController::class, 'publish'])->name('admin.post.publish');
+Route::get('/admin/post/{key}/publish', [PostController::class, 'publish'])->name('admin.post.publish');
 Route::post('/admin/ckeditor/image/upload', [PostController::class, 'imageUpload'])->name('admin.ckeditor.image.upload');
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
     Route::resource('/post', PostController::class);

@@ -9,7 +9,6 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Str;
 
@@ -107,6 +106,7 @@ class PostController extends Controller
         ]);
     }
 
+
     public function update(StorePostRequest $request, $id)
     {
         try{
@@ -152,6 +152,20 @@ class PostController extends Controller
             return back()->with('error', $e->getMessage());
         }
     }
+    public function publish($key)
+    {
+        DB::beginTransaction();
+        try{
+
+            Post::where('_key', decrypt($key))->update(['status' => 'Published']);
+            DB::commit();
+            return back()->with('success', 'Post published successfull.');
+        } catch (\Exception $e){
+            DB::rollBack();
+            // return response()->json($e->getMessage(), $e->getCode());
+            return "Something went wrong while record deleting!";
+        }
+    }
 
     public function delete(Request $request)
     {
@@ -159,14 +173,17 @@ class PostController extends Controller
         try{
             foreach($request->data as $key){
                 $data = Post::where('_key', $key)->firstOrFail();
+                if(!empty($data->image) && file_exists($data->image)){
+                    unlink($data->image);
+                }
+
                 $data->delete();
             }
             DB::commit();
             return "Record deleted successfull.";
         }catch(\Exception $e){
             DB::rollBack();
-            // return response()->json($e->getMessage(), $e->getCode());
-            return "Something went wrong while record deleting!";
+            return response()->json($e->getMessage(), $e->getCode());
         }
     }
 }
