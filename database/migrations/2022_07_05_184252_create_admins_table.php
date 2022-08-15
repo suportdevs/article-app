@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('type');
+            $table->string('username')->unique();
+            $table->string('slug')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -26,6 +28,7 @@ return new class extends Migration
             $table->integer('updated_by')->nullable();
             $table->softDeletes();
             $table->integer('deleted_by')->nullable();
+            $table->string('_key', 32)->unique();
         });
     }
 

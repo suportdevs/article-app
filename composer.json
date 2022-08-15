@@ -28,9 +28,7 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "app/helpers/helper.php",
-            "app/Services/MasterService.php",
-            "app/Services/ServiceTraits.php"
+            "app/helpers/helper.php"
         ]
 
     },

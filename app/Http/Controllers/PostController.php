@@ -57,7 +57,7 @@ class PostController extends Controller
                 $attributes['_key']         = Str::random(32);
                 Post::create($attributes);
 
-                Image::make($request->file('image'))->resize(1060, 780)->save(public_path('media/featured/') . $finalName);
+                Image::make($request->file('image'))->resize(1600, 1066)->save(public_path('media/featured/') . $finalName);
                 
                 DB::commit();
                 return redirect()->route('admin.post.index')->with('success', 'Record inserted successfully.');
@@ -78,7 +78,7 @@ class PostController extends Controller
             $extension = $request->file('upload')->getClientOriginalExtension();
             $finalName = $fileName .'_'.time().'.'.$extension;
 
-            Image::make($request->file('upload'))->resize(1060, 780)->save(public_path('media/') . $finalName);
+            Image::make($request->file('upload'))->resize(1600, 1066)->save(public_path('media/') . $finalName);
 
             // $request->file('upload')->move(public_path('media/'), $finalName);
 
@@ -131,7 +131,7 @@ class PostController extends Controller
                 $attributes['_key']         = Str::random(32);
                 $post->update($attributes);
 
-                Image::make($request->file('image'))->resize(1060, 780)->save(public_path('media/featured/') . $finalName);
+                Image::make($request->file('image'))->resize(1600, 1066)->save(public_path('media/featured/') . $finalName);
 
                 DB::commit();
                 return redirect()->route('admin.post.index')->with('success', 'Record inserted successfully.');

@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // Tags Routes
-Route::post('/admin/tags/delete', [TagController::class, 'delete'])->name('admin.tags.delete');
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
+Route::post(app()->master->urlPrefix . '/admin/tags/delete', [TagController::class, 'delete'])->name(app()->master->routePrefix. 'tags.delete');
+Route::group(['prefix' => app()->master->urlPrefix, 'as' => 'admin.'], function() {
     Route::resource('/tags', TagController::class);
 });
 

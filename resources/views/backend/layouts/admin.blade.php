@@ -18,13 +18,9 @@
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" />
   </head>
-
 <?php
-use App\Services\MasterService;
-$master = new MasterService();
-
+dd(app()->master);
 ?>
-
   <!-- ***** Preloader Start ***** -->
   <div id="preloader">
         <div class="jumper">
