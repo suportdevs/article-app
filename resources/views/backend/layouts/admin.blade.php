@@ -18,9 +18,7 @@
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" />
   </head>
-<?php
-dd(app()->master);
-?>
+  
   <!-- ***** Preloader Start ***** -->
   <div id="preloader">
         <div class="jumper">

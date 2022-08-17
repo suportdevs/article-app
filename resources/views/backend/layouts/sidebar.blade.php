@@ -1,3 +1,6 @@
+<?php
+  $urlPrefix = app()->master->urlPrefix;
+?>
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
           <ul class="nav">
             <li class="nav-item nav-category">Main</li>
@@ -7,17 +10,17 @@
                 <span class="menu-title">Dashboard</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="collapse" href="#ui-article" aria-expanded="false" aria-controls="ui-basic">
+            <li class="nav-item {{ request()->is($urlPrefix . '/tags*') || request()->is($urlPrefix . '/category*') || request()->is($urlPrefix . '/post*') ? ' active' : '' }}">
+              <a class="nav-link" data-bs-toggle="collapse" href="#ui-article" aria-expanded="{{ request()->is($urlPrefix . '/tags*') || request()->is($urlPrefix . '/category*') || request()->is($urlPrefix . '/post*') ? 'true' : 'false' }}" aria-controls="ui-basic">
                 <span class="icon-bg"><i class="mdi mdi-crosshairs-gps menu-icon"></i></span>
                 <span class="menu-title">Artcle</span>
                 <i class="menu-arrow"></i>
-              </a>
-              <div class="collapse" id="ui-article">
+              </a> 
+              <div class="collapse {{ request()->is($urlPrefix . '/tags*') || request()->is($urlPrefix . '/category*') || request()->is($urlPrefix . '/post*') ? ' show' : '' }}" id="ui-article">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="{{ route('admin.tags.index') }}">Tags</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{{ route('admin.category.index') }}">Category</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="{{ route('admin.post.index') }}">Posts</a></li>
+                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/tags*') ? ' active' : '' }}" href="{{ route('admin.tags.index') }}">Tags</a></li>
+                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/category*') ? ' active' : '' }}" href="{{ route('admin.category.index') }}">Category</a></li>
+                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/post*') ? ' active' : '' }}" href="{{ route('admin.post.index') }}">Posts</a></li>
                 </ul>
               </div>
             </li>

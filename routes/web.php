@@ -2,21 +2,22 @@
 
 use Illuminate\Support\Facades\Route;
 
+$urlPrefix = app()->master->urlPrefix;
+$routePrefix = app()->master->routePrefix;
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin/dashboard', function () {
+Route::get($urlPrefix .'/dashboard', function () {
     return view('backend.dashboard');
 })->middleware(['admin:admin'])->name('admin.dashboard');
-// Route::get('/suportdevs/dashboard', function () {
-//     return view('backend.dashboard');
-// })->middleware(['admin:admin'])->name('admin.dashboard');
 
-Route::get('/dashboard', function () {    
-    return view('dashboard');
+Route::get($urlPrefix .'/dashboard', function () {    
+    return view('backend.dashboard');
 })->middleware(['auth'])->name('dashboard');
-Route::get('/suportdevs/dashboard', function () {    
+
+Route::get('dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 

@@ -15,7 +15,7 @@
                 <p class="m-0">Category Management Database</p>
               </div>
               <div>
-                <a href="{{ route('admin.category.create') }}" class="btn btn-success btn-sm px-1 py-1"><span class="mdi mdi-plus"></span> New</a>
+                <a href="{{ route(app()->master->routePrefix .'category.create') }}" class="btn btn-success btn-sm px-1 py-1"><span class="mdi mdi-plus"></span> New</a>
                 <button class="btn btn-danger btn-sm px-1 py-1" id="deleteMultiple" disabled>Delete</button>
               </div>
             </div>

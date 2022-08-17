@@ -4,6 +4,7 @@
 
 use App\Models\Tag;
 use App\Services\MasterService;
+use Illuminate\Support\Facades\Auth;
 
 function pr($object, $exit = true) {
     echo '<pre>';
@@ -14,15 +15,6 @@ function pr($object, $exit = true) {
     }
 }
 
-
-function getMamun()
-{
-    return new MasterService(); 
-}
-// $master  = new MasterService();
-
-// dd($master->tags());
-
 function articleTypes()
 {
     return ['Article', 'News', 'Videos'];
@@ -30,4 +22,9 @@ function articleTypes()
 function articleStatus()
 {
     return ['Pending', 'Publish', 'Draft'];
+}
+
+function authenticateUser() {
+
+    return Auth::user();
 }

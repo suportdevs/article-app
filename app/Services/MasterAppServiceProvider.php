@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class MasterAppServiceProvider {
@@ -13,33 +15,38 @@ class MasterAppServiceProvider {
     public function __construct()
     {
         $this->users[] = $this->users();
-        $this->urlSegments[] = $this->urlSegments();
+        $this->urlSegments = $this->urlSegments();
         $this->urlPrefix = $this->urlPrefix();
         $this->routePrefix = $this->routePrefix();
     }
 
     public function users()
     {
-        return Auth::user() ?? [];
+        return User::get();
     }
 
     public function urlSegments()
     {
-        return explode("/", $_SERVER['REQUEST_URI']);
+        $requestUrl = $_SERVER['REQUEST_URI'] ?? "/";
+        return explode('/', $requestUrl);
     }
 
     public function urlPrefix()
-    {dd($this->users());
-        if(is_array($this->urlSegments()) && $this->urlSegments()[1] === $this->users()->slug){
-            return $this->users()->slug . "/" ?? '';
+    {
+        if(is_array($this->urlSegments()) && $this->urlSegments() !== null && !empty($this->urlSegments())){
+            foreach($this->users() as $user){
+                dd($this->urlSegments());
+                return ($this->urlSegments()[1] === $user->slug) ? $user->slug : '';
+            }
         }
-        return '';
     }
 
     public function routePrefix()
     {
-        if(is_array($this->urlSegments()) && $this->urlSegments()[1] === $this->users()->slug){
-            return $this->users()->slug . '.' ?? '';
+        if(is_array($this->urlSegments()) && $this->urlSegments() !== null){
+            foreach($this->users() as $user){
+                return ($this->urlSegments()[1] === $user->slug) ? $user->slug . "." : '';
+            }
         }
         return '';
     }
