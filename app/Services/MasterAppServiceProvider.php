@@ -35,7 +35,7 @@ class MasterAppServiceProvider {
     {
         if(is_array($this->urlSegments()) && $this->urlSegments() !== null && !empty($this->urlSegments())){
             foreach($this->users() as $user){
-                dd($this->urlSegments());
+                // dd($this->urlSegments());
                 return ($this->urlSegments()[1] === $user->slug) ? $user->slug : '';
             }
         }

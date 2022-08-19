@@ -2,7 +2,7 @@
 
   
   <x-breadcrumbs :title="$page_title">
-    <a href="{{ route('admin.dashboard') }}" class="text-sm text-dark text-decoration-none py-0 ">Home > </a>
+    <a href="{{ route(app()->master->routePrefix . 'dashboard') }}" class="text-sm text-dark text-decoration-none py-0 ">Home > </a>
     <a href="{{ route('admin.tags.index') }}" class="text-sm text-dark text-decoration-none py-0 "> Tags > </a>
     <a > Create</a>
   </x-breadcrumbs>

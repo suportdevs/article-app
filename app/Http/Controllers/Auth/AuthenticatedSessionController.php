@@ -35,8 +35,8 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-dd(app()->master->urlPrefix());
-        return redirect(app()->master->urlPrefix . "/dashboard");
+        
+        return redirect(Auth::user()->slug . "/dashboard");
     }
 
     /**

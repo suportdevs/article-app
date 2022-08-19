@@ -1,7 +1,7 @@
 <x-admin-layout>
   
   <x-breadcrumbs :title="$page_title">
-    <a href="{{ route('admin.dashboard') }}" class="text-sm text-dark text-decoration-none py-0 ">Home > </a>
+    <a href="{{ route(app()->master->routePrefix . 'dashboard') }}" class="text-sm text-dark text-decoration-none py-0 ">Home > </a>
     <a href="{{ route('admin.category.index') }}" class="text-sm text-dark text-decoration-none py-0 "> Post > </a>
     <a > Edit</a>
   </x-breadcrumbs>

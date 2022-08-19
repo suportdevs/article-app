@@ -11,11 +11,11 @@ Route::get('/', function () {
 
 Route::get($urlPrefix .'/dashboard', function () {
     return view('backend.dashboard');
-})->middleware(['admin:admin'])->name('admin.dashboard');
+})->middleware(['admin:admin'])->name($routePrefix.'dashboard');
 
 Route::get($urlPrefix .'/dashboard', function () {    
     return view('backend.dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth'])->name($routePrefix.'dashboard');
 
 Route::get('dashboard', function () {
     return view('dashboard');

@@ -1,7 +1,7 @@
 <x-admin-layout>
   
   <x-breadcrumbs :title="$page_title">
-    <a href="{{ route('admin.dashboard') }}" class="text-sm text-dark text-decoration-none py-0 ">Home > </a>
+    <a href="{{ route(app()->master->routePrefix . 'dashboard') }}" class="text-sm text-dark text-decoration-none py-0 ">Home > </a>
     <a class="text-sm text-dark text-decoration-none py-0 "> Posts </a>
   </x-breadcrumbs>
 
@@ -21,7 +21,7 @@
             </div>
             <div class="d-block">
               <div class="row">
-                <form action="{{ route('admin.post.index') }}" method="GET" id="searchForm">
+                <form action="{{ route(app()->master->routePrefix.'post.index') }}" method="GET" id="searchForm">
                   @csrf
                   <div class="input-group mb-3">
                     <div class="col-md-1">
@@ -58,7 +58,7 @@
                 </form>
               </div>
             </div>
-            <form action="{{ route('admin.post.delete') }}" method="POST" id="formList">
+            <form action="{{ route(app()->master->routePrefix.'post.delete') }}" method="POST" id="formList">
               <div id="ajaxContent-wraper" class="table-responsive-sm">
                 @include('backend.posts._list')
               </div>
