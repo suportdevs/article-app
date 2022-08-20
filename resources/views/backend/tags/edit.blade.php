@@ -3,7 +3,7 @@
   
   <x-breadcrumbs :title="$page_title">
     <a href="{{ route(app()->master->routePrefix . 'dashboard') }}" class="text-sm text-dark text-decoration-none py-0 ">Home > </a>
-    <a href="{{ route('admin.tags.index') }}" class="text-sm text-dark text-decoration-none py-0 "> Tags > </a>
+    <a href="{{ route(app()->master->routePrefix . 'tags.index') }}" class="text-sm text-dark text-decoration-none py-0 "> Tags > </a>
     <a > Edit</a>
   </x-breadcrumbs>
 
@@ -28,7 +28,7 @@
               </div>
             </div>
             <div class="card-content mt-4">
-                <form action="{{ route('admin.tags.update', $data->id ) }}" method="POST" class="forms-sample">
+                <form action="{{ route(app()->master->routePrefix . 'tags.update', $data->id ) }}" method="POST" class="forms-sample">
                     @csrf
                     @method('PUT')
                     <div class="form-group">

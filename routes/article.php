@@ -11,20 +11,20 @@ $routePrefix = app()->master->routePrefix;
 
 // Tags Routes
 Route::post("$urlPrefix/tags/delete", [TagController::class, "delete"])->name($routePrefix."tags.delete");
-Route::group(["prefix" => "$urlPrefix", "as" => "admin."], function() {
+Route::group(["prefix" => "$urlPrefix", "as" => "$routePrefix"], function() {
     Route::resource("/tags", TagController::class);
 });
 
 // Category Routes
 Route::post("$urlPrefix/category/delete", [CategoryController::class, "delete"])->name($routePrefix."category.delete");
-Route::group(["prefix" => "$urlPrefix", "as" => "admin."], function() {
+Route::group(["prefix" => "$urlPrefix", "as" => "$routePrefix"], function() {
     Route::resource("/category", CategoryController::class);
 });
 
 // Post Routes
-Route::post("$urlPrefix/admin/post/delete", [PostController::class, "delete"])->name($routePrefix."post.delete");
-Route::get("$urlPrefix/admin/post/{key}/publish", [PostController::class, "publish"])->name($routePrefix."post.publish");
-Route::post("$urlPrefix/admin/ckeditor/image/upload", [PostController::class, "imageUpload"])->name($routePrefix."ckeditor.image.upload");
-Route::group(["prefix" => "$urlPrefix", "as" => "admin."], function() {
+Route::post("$urlPrefix/post/delete", [PostController::class, "delete"])->name($routePrefix."post.delete");
+Route::get("$urlPrefix/post/{key}/publish", [PostController::class, "publish"])->name($routePrefix."post.publish");
+Route::post("$urlPrefix/ckeditor/image/upload", [PostController::class, "imageUpload"])->name($routePrefix."ckeditor.image.upload");
+Route::group(["prefix" => "$urlPrefix", "as" => "$routePrefix"], function() {
     Route::resource("/post", PostController::class);
 });

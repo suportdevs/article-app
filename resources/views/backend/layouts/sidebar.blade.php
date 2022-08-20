@@ -18,9 +18,9 @@
               </a> 
               <div class="collapse {{ request()->is($urlPrefix . '/tags*') || request()->is($urlPrefix . '/category*') || request()->is($urlPrefix . '/post*') ? ' show' : '' }}" id="ui-article">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/tags*') ? ' active' : '' }}" href="{{ route('admin.tags.index') }}">Tags</a></li>
-                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/category*') ? ' active' : '' }}" href="{{ route('admin.category.index') }}">Category</a></li>
-                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/post*') ? ' active' : '' }}" href="{{ route('admin.post.index') }}">Posts</a></li>
+                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/tags*') ? ' active' : '' }}" href="{{ route(app()->master->routePrefix . 'tags.index') }}">Tags</a></li>
+                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/category*') ? ' active' : '' }}" href="{{ route(app()->master->routePrefix . 'category.index') }}">Category</a></li>
+                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/post*') ? ' active' : '' }}" href="{{ route(app()->master->routePrefix . 'post.index') }}">Posts</a></li>
                 </ul>
               </div>
             </li>

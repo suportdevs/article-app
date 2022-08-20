@@ -3,7 +3,7 @@
   
   <x-breadcrumbs :title="$page_title">
     <a href="{{ route(app()->master->routePrefix . 'dashboard') }}" class="text-sm text-dark text-decoration-none py-0 ">Home > </a>
-    <a href="{{ route('admin.category.index') }}" class="text-sm text-dark text-decoration-none py-0 "> Category > </a>
+    <a href="{{ route(app()->master->routePrefix . 'category.index') }}" class="text-sm text-dark text-decoration-none py-0 "> Category > </a>
     <a > Create</a>
   </x-breadcrumbs>
 
@@ -28,7 +28,7 @@
               </div>
             </div>
             <div class="card-content mt-4">
-                <form action="{{ route('admin.category.store') }}" method="POST" class="forms-sample">
+                <form action="{{ route(app()->master->routePrefix . 'category.store') }}" method="POST" class="forms-sample">
                     @csrf
                     <div class="form-group">
                         <label for="name" class="text-dark">Name</label>

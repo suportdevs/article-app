@@ -40,14 +40,14 @@ class CategoryController extends Controller
                 'name'          => $request->name,
                 'slug'          => Str::slug($request->name),
                 'description'   => $request->description,
-                'created_by'    => Auth::guard('admin')->user()->id,
+                'created_by'    => Auth::user()->id,
                 '_key'          => Str::random(32)
             ]);
             DB::commit();
-            return redirect()->route('admin.category.index')->with('success', 'Record inserted successfull.');
+            return redirect()->route(app()->master->routePrefix . 'category.index')->with('success', 'Record inserted successfull.');
         }catch(\Exception $e){
             DB::rollBack();
-            return back()->with('error', 'Something went wrong while inserting!');
+            return back()->with('error', 'Something went wrong while inserting! ' . $e->getMessage());
         }
     }
 
@@ -70,13 +70,13 @@ class CategoryController extends Controller
                 'name'          => $request->name,
                 'slug'          => Str::slug($request->name),
                 'description'   => $request->description,
-                'updated_by'    => Auth::guard('admin')->user()->id
+                'updated_by'    => Auth::user()->id
             ]);
             DB::commit();
-            return redirect()->route('admin.category.index')->with('success', 'Record inserted successfull.');
+            return redirect()->route(app()->master->routePrefix . 'category.index')->with('success', 'Record inserted successfull.');
         }catch(\Exception $e){
             DB::rollBack();
-            return back()->with('error', 'Something went wrong while updating!');
+            return back()->with('error', 'Something went wrong while updating! ' . $e->getMessage());
         }
     }
 

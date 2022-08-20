@@ -16,15 +16,15 @@
               </div>
               <div>
                 <a href="{{ route(app()->master->routePrefix .'category.create') }}" class="btn btn-success btn-sm px-1 py-1"><span class="mdi mdi-plus"></span> New</a>
-                <button class="btn btn-danger btn-sm px-1 py-1" id="deleteMultiple" disabled>Delete</button>
+                <button class="btn btn-danger btn-sm px-1 py-1" id="deleteMultiple" disabled><span class="mdi mdi-delete-outline"></span> Delete</button>
               </div>
             </div>
             <div class="d-block">
               <div class="row">
-                <form action="{{ route('admin.category.index') }}" method="get" id="searchForm">
+                <form action="{{ route(app()->master->routePrefix . 'category.index') }}" method="get" id="searchForm">
                   @csrf
                   <div class="input-group mb-3">
-                    <div class="col-md-1">
+                    <div class="col-md-1" style="width: 50px;">
                       <select name="item_count" id="item_count" class="form-control">
                         <option value="25">25</option>
                         <option value="50">50</option>
@@ -42,7 +42,7 @@
                 </form>
               </div>
             </div>
-            <form action="{{ route('admin.category.delete') }}" method="POST" id="formList">
+            <form action="{{ route(app()->master->routePrefix . 'category.delete') }}" method="POST" id="formList">
               <div id="ajaxContent-wraper" class="table-responsive-sm">
                 @include('backend.category._list')
               </div>

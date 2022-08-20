@@ -20,7 +20,7 @@
         <td class="text-wrap">{{ Str::words($data->description, 10, '...') }}</td>
         <td>{{ Auth::guard("admin")->user()->name ?? ''}}</td>
         <td>{{ $data->created_at->diffForHumans() }}</td>
-        <td><a href="{{ route('admin.category.edit', Crypt::encrypt($data->id)) }}" class="btn btn-primary btn-sm px-1 py-1"><span class="mdi mdi-wrench"></span></a></td>
+        <td><a href="{{ route(app()->master->routePrefix . 'category.edit', Crypt::encrypt($data->id)) }}" class="btn btn-primary btn-sm px-1 py-1"><span class="mdi mdi-wrench"></span></a></td>
         <td><input type="checkbox" name="data[]" value="{{ $data->_key }}" class="check_item"></td>
     </tr>
     @empty
