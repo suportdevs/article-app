@@ -53,14 +53,14 @@ class PostController extends Controller
                 $attributes['tag_id']       = json_encode($request->tag_id);
                 $attributes['image']        = $imageUrl;
                 $attributes['slug']         = Str::slug($request->title);
-                $attributes['created_by']   = Auth::guard('admin')->user()->id;
+                $attributes['created_by']   = Auth::user()->id;
                 $attributes['_key']         = Str::random(32);
                 Post::create($attributes);
 
                 Image::make($request->file('image'))->resize(1600, 1066)->save(public_path('media/featured/') . $finalName);
                 
                 DB::commit();
-                return redirect()->route('admin.post.index')->with('success', 'Record inserted successfully.');
+                return redirect()->route(app()->master->routePrefix . 'post.index')->with('success', 'Record inserted successfully.');
             } else {
                 return back()->with('error', 'Post image required!');
             }

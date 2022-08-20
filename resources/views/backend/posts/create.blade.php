@@ -1,9 +1,8 @@
 <x-admin-layout>
-
   
   <x-breadcrumbs :title="$page_title">
     <a href="{{ route(app()->master->routePrefix . 'dashboard') }}" class="text-sm text-dark text-decoration-none py-0 ">Home > </a>
-    <a href="{{ route('admin.category.index') }}" class="text-sm text-dark text-decoration-none py-0 "> Category > </a>
+    <a href="{{ route(app()->master->routePrefix . 'post.index') }}" class="text-sm text-dark text-decoration-none py-0 "> Category > </a>
     <a > Create</a>
   </x-breadcrumbs>
 
@@ -28,7 +27,7 @@
               </div>
             </div>
             <div class="card-content mt-4">
-                <form action="{{ route('admin.post.store') }}" method="POST" class="forms-sample" enctype="multipart/form-data">
+                <form action="{{ route(app()->master->routePrefix . 'post.store') }}" method="POST" class="forms-sample" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="title" class="text-dark">Title</label>
@@ -40,7 +39,7 @@
                     </div>
                     <div class="form-group">
                         <label for="description" class="text-dark">Description</label>
-                        <textarea name="description" id="editor" cols="80" rows="3" class="form-control" placeholder="Write something..." style="min-height: 150px;" required></textarea>
+                        <textarea name="description" id="editor" cols="80" rows="3" class="form-control" placeholder="Write something..." style="min-height: 150px;" ></textarea>
                     </div>
                     <div class="form-group">
                         <label for="image" class="text-dark">Fetured Image</label>

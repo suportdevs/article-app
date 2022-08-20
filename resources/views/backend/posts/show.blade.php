@@ -3,7 +3,7 @@
   
   <x-breadcrumbs :title="$page_title">
     <a href="{{ route(app()->master->routePrefix . 'dashboard') }}" class="text-sm text-dark text-decoration-none py-0 ">Home > </a>
-    <a href="{{ route('admin.post.index') }}" class="text-sm text-dark text-decoration-none py-0 "> Post > </a>
+    <a href="{{ route(app()->master->routePrefix . 'post.index') }}" class="text-sm text-dark text-decoration-none py-0 "> Post > </a>
     <a > Create</a>
   </x-breadcrumbs>
 

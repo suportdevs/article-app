@@ -15,7 +15,7 @@
                 <p class="m-0">Posts Management Database</p>
               </div>
               <div>
-                <a href="{{ route('admin.post.create') }}" class="btn btn-success btn-sm px-1 py-1"><span class="mdi mdi-plus"></span> New</a>
+                <a href="{{ route(app()->master->routePrefix . 'post.create') }}" class="btn btn-success btn-sm px-1 py-1"><span class="mdi mdi-plus"></span> New</a>
                 <button class="btn btn-danger btn-sm px-1 py-1" id="deleteMultiple" disabled>Delete</button>
               </div>
             </div>
@@ -24,7 +24,7 @@
                 <form action="{{ route(app()->master->routePrefix.'post.index') }}" method="GET" id="searchForm">
                   @csrf
                   <div class="input-group mb-3">
-                    <div class="col-md-1">
+                    <div class="col-md-1" style="width: 50px;">
                       <select name="item_count" id="item_count" class="form-control">
                         <option value="25">25</option>
                         <option value="50">50</option>
@@ -32,7 +32,7 @@
                       </select>
                     </div>
                     <div class="col-md-2">
-                      <input type="text" name="title" placeholder="Title/Description" class="form-control">
+                      <input type="text" name="title" placeholder="Title / Description" class="form-control">
                     </div>
                     <div class="col-md-2">
                       <select name="category_id" id="category_id" class="form-control select2search">
@@ -58,7 +58,7 @@
                 </form>
               </div>
             </div>
-            <form action="{{ route(app()->master->routePrefix.'post.delete') }}" method="POST" id="formList">
+            <form action="{{ route(app()->master->routePrefix . 'post.delete') }}" method="POST" id="formList">
               <div id="ajaxContent-wraper" class="table-responsive-sm">
                 @include('backend.posts._list')
               </div>

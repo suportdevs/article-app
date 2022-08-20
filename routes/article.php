@@ -24,7 +24,7 @@ Route::group(["prefix" => "$urlPrefix", "as" => "$routePrefix"], function() {
 // Post Routes
 Route::post("$urlPrefix/post/delete", [PostController::class, "delete"])->name($routePrefix."post.delete");
 Route::get("$urlPrefix/post/{key}/publish", [PostController::class, "publish"])->name($routePrefix."post.publish");
-Route::post("$urlPrefix/ckeditor/image/upload", [PostController::class, "imageUpload"])->name($routePrefix."ckeditor.image.upload");
+Route::post("/admin/ckeditor/image/upload", [PostController::class, "imageUpload"])->name("admin.ckeditor.image.upload");
 Route::group(["prefix" => "$urlPrefix", "as" => "$routePrefix"], function() {
     Route::resource("/post", PostController::class);
 });

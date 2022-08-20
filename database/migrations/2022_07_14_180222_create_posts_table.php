@@ -20,10 +20,11 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->string('slug')->nullable();
             $table->string('image')->nullable();
+            $table->text('intro')->nullable();
             $table->text('description')->nullable();
-            $table->enum('status', ['Pending', 'Draft', 'Publish'])->default('Pending');
+            $table->enum('status', ['Pending', 'Drafteds', 'Published'])->default('Pending');
             $table->enum('type', ['News', 'Videos', 'Article'])->default('Article');
-            $table->enum('is_featured', ['Yes', 'No'])->default('No');
+            $table->enum('is_featured', ['Featured', 'Non-Featured'])->default('Non-Featured');
             $table->timestamps();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
