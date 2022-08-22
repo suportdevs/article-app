@@ -24,12 +24,12 @@ class Post extends Model
         })->when($fillters->category_id ?? false, function($query, $category_id){
             $query->where('category_id', $category_id);
         })->when($fillters->tag_id ?? false, function($query, $tag_id){
-            echo "<pre>";
-            var_dump($tag_id);
-            echo "</pre>";
-            foreach($this->tag_id as $tagArr){
-                array_search($tag_id, $tagArr, true);
-            };
+            // echo "<pre>";
+            // var_dump($tag_id);
+            // echo "</pre>";
+            // foreach($this->tag_id as $tagArr){
+            //     array_search($tag_id, $tagArr, true);
+            // };
             // $query->where('category_id', $category_id);
         });
     }

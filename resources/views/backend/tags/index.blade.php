@@ -16,7 +16,7 @@
               </div>
               <div>
                 <a href="{{ route(app()->master->routePrefix . 'tags.create') }}" class="btn btn-success btn-sm px-1 py-1"><span class="mdi mdi-plus"></span> New</a>
-                <button class="btn btn-danger btn-sm px-1 py-1" id="deleteMultiple" disabled>Delete</button>
+                <button class="btn btn-danger btn-sm px-1 py-1" id="deleteMultiple" disabled><span class="mdi mdi-delete-outline"></span> Delete</button>
               </div>
             </div>
             <div class="d-block">

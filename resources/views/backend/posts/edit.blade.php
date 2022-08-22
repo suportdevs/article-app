@@ -2,7 +2,7 @@
   
   <x-breadcrumbs :title="$page_title">
     <a href="{{ route(app()->master->routePrefix . 'dashboard') }}" class="text-sm text-dark text-decoration-none py-0 ">Home > </a>
-    <a href="{{ route(app()->routePrefix . 'post.index') }}" class="text-sm text-dark text-decoration-none py-0 "> Post > </a>
+    <a href="{{ route(app()->master->routePrefix . 'post.index') }}" class="text-sm text-dark text-decoration-none py-0 "> Post > </a>
     <a > Edit</a>
   </x-breadcrumbs>
 
@@ -27,7 +27,7 @@
               </div>
             </div>
             <div class="card-content mt-4">
-            <form action="{{ route(app()->routePrefix . 'post.update', $data->id) }}" method="POST" class="forms-sample" enctype="multipart/form-data">
+            <form action="{{ route(app()->master->routePrefix . 'post.update', $data->id) }}" method="POST" class="forms-sample" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="form-group">

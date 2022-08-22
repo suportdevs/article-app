@@ -5,10 +5,12 @@ $(document).ready(function() {
             $('input:checkbox.check_item').not(this).prop('checked', this.checked);
             $(".check_item").closest("tr").not(".check_all").css({"background-color": "#ef002c45"});
             $("#deleteMultiple").prop('disabled', false);
+            $("#approvedMultiple").prop('disabled', false);
         } else {
             $('input:checkbox.check_item').not(this).prop('checked', this.checked);
             $(".check_item").closest("tr").not('.check_all').css({"background-color": ""});
             $("#deleteMultiple").prop('disabled', true);
+            $("#approvedMultiple").prop('disabled', true);
         }
     });
 
@@ -21,9 +23,11 @@ $(document).ready(function() {
         if($('.check_item:checked').not(".check_all").length > 0){
             $('.check_all').not(this).prop('checked', true);
             $("#deleteMultiple").prop('disabled', false);
+            $("#approvedMultiple").prop('disabled', false);
         }else{
             $('.check_all').prop('checked', false);
             $("#deleteMultiple").prop('disabled', true);
+            $("#approvedMultiple").prop('disabled', true);
         }
     });
     // end index checked unchecked
@@ -67,6 +71,7 @@ $(document).ready(function() {
         $("#preloader").hide();
     }
 
+    // delete multiple data
     $(document).on("click", "#deleteMultiple", (e) => {
         e.preventDefault();
         const _url = $("#formList").attr('action');
@@ -80,6 +85,23 @@ $(document).ready(function() {
                 toastr.error(error.response.data.message);
             })
         }
-    })
+    });
+
+    // approved multiple data
+    $(document).on("click", "#approvedMultiple", (e) => {
+        e.preventDefault();
+        const _url = $(e.target).data('url');
+
+        const _form = $("#formList");
+        let _rc = confirm("Are you sure about this action? This cannot be undone!");
+        if (_rc === true) {
+            axios.post(_url, _form.serialize()).then((response) => {
+                toastr.success(response.data);
+                $("#searchForm").trigger('submit');
+            }).catch((error) => {
+                toastr.error(error.response.data.message);
+            })
+        }
+    });
 })
 

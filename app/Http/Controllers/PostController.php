@@ -127,24 +127,24 @@ class PostController extends Controller
                 $attributes['tag_id']       = json_encode($request->tag_id);
                 $attributes['image']        = $imageUrl;
                 $attributes['slug']         = Str::slug($request->title);
-                $attributes['created_by']   = Auth::guard('admin')->user()->id;
+                $attributes['updated_by']   = Auth::user()->id;
                 $attributes['_key']         = Str::random(32);
                 $post->update($attributes);
 
                 Image::make($request->file('image'))->resize(1600, 1066)->save(public_path('media/featured/') . $finalName);
 
                 DB::commit();
-                return redirect()->route('admin.post.index')->with('success', 'Record inserted successfully.');
+                return redirect()->route(app()->master->routePrefix . 'post.index')->with('success', 'Record inserted successfully.');
             } else {
                 $attributes = $request->validated();
                 $attributes['tag_id']       = json_encode($request->tag_id);
                 $attributes['slug']         = Str::slug($request->title);
-                $attributes['created_by']   = Auth::guard('admin')->user()->id;
+                $attributes['updated_by']   = Auth::user()->id;
                 $attributes['_key']         = Str::random(32);
                 $post->update($attributes);
                 
                 DB::commit();
-                return redirect()->route('admin.post.index')->with('success', 'Record inserted successfully.');
+                return redirect()->route(app()->master->routePrefix . 'post.index')->with('success', 'Record inserted successfully.');
             }
 
         } catch (\Exception $e) {
@@ -152,18 +152,28 @@ class PostController extends Controller
             return back()->with('error', $e->getMessage());
         }
     }
-    public function publish($key)
+    public function approved(Request $request)
     {
         DB::beginTransaction();
         try{
-
-            Post::where('_key', decrypt($key))->update(['status' => 'Published']);
+            foreach($request->data as $key){
+                $data = Post::where('_key', $key)->firstOrFail();
+                
+                if($data->status == 'Published'){
+                    $data->status = 'Pending';
+                } else {
+                    $data->status = 'Published';
+                }
+                if(!$data->save()){
+                    throw new \Exception("Error! while saving order record.");
+                }
+            }
             DB::commit();
-            return back()->with('success', 'Post published successfull.');
-        } catch (\Exception $e){
+            return "Record deleted successfull.";
+        }catch(\Exception $e){
             DB::rollBack();
-            // return response()->json($e->getMessage(), $e->getCode());
-            return "Something went wrong while record deleting!";
+            return "Record deleted successfull.";
+            return "$e->getMessage()";
         }
     }
 
@@ -183,7 +193,7 @@ class PostController extends Controller
             return "Record deleted successfull.";
         }catch(\Exception $e){
             DB::rollBack();
-            return response()->json($e->getMessage(), $e->getCode());
+            return response()->json("error", $e->getMessage());
         }
     }
 }

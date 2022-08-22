@@ -25,7 +25,7 @@
             <div class="item"></div>
             <div class="item"></div>
             <div class="item"></div>
-            <div id="loading-text" class="mt-5 text-dark">Loading...</div>
+            <div id="loading-text" class="mt-5 text-dark"><img src="{{ asset('assets/images/loader.gif') }}" alt=""></div>
           </div>
     </div>
     <!-- ***** Preloader End ***** -->

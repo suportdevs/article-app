@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->text('intro')->nullable();
             $table->text('description')->nullable();
-            $table->enum('status', ['Pending', 'Drafteds', 'Published'])->default('Pending');
+            $table->enum('status', ['Pending', 'Drafted', 'Published'])->default('Pending');
             $table->enum('type', ['News', 'Videos', 'Article'])->default('Article');
             $table->enum('is_featured', ['Featured', 'Non-Featured'])->default('Non-Featured');
             $table->timestamps();
