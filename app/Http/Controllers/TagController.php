@@ -38,7 +38,7 @@ class TagController extends Controller
                 'name'          => $request->name,
                 'slug'          => Str::slug($request->name),
                 'created_by'    => Auth::user()->id,
-                '_key'          => Str::random(32)
+                '_key'          => Str::uniqid(32)
             ]);
             DB::commit();
             return redirect()->route(app()->master->routePrefix . 'tags.index')->with('success', 'Record inserted successfull.');

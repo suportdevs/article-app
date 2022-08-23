@@ -15,8 +15,7 @@ class Tag extends Model
 
     public function scopeFilter($query, $filters)
     {
-        $query->when($filters->tag_name ?? false, function($query, $name)
-        {
+        $query->when($filters->tag_name ?? false, function($query, $name){
             $query->where('name', 'like', '%' . trim($name) . '%');
         });
     }

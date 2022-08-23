@@ -40,6 +40,7 @@ $(document).ready(function() {
     });
     
     const search = (url) => {
+        showPreloader();
         $.ajax({
             url: url,
             type: 'get',
@@ -55,6 +56,11 @@ $(document).ready(function() {
             }
         });
     }
+
+    $(document).on('click', '#ajaxPaginate ul li a', function (event) {
+        event.preventDefault();
+        search($(this).attr('href'));
+    });
 
     $(document).on('click', '#clear', function () {
         $('#searchForm')[0].reset();
@@ -103,5 +109,6 @@ $(document).ready(function() {
             })
         }
     });
+    
 })
 
