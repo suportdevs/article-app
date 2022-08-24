@@ -6,9 +6,12 @@ use App\Http\Requests\StorePostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Models\User;
+use App\Notifications\NewPostNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Str;
 
@@ -17,19 +20,19 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $paginateCount = $request->item_count ?? 25;
-
         $view = $request->ajax() ? 'backend.posts._list' : 'backend.posts.index';
 
         return view($view, [
             'page_title' => 'Post',
             'categories' => Category::pluck('name', 'id'),
             'tags' => Tag::pluck('name', 'id'),
-            'dataset' => Post::filter($request)->paginate($paginateCount)
+            'dataset' => Post::getByUser()->filter($request)->paginate($paginateCount)
         ]);
     }
 
     public function create()
     {
+        // dd($user = User::where('role_id', 1)->get());
         return view('backend.posts.create', [
             'page_title' => 'Post',
             'categories' => Category::pluck('name', 'id'),
@@ -55,10 +58,20 @@ class PostController extends Controller
                 $attributes['slug']         = Str::slug($request->title);
                 $attributes['created_by']   = Auth::user()->id;
                 $attributes['_key']         = Str::random(32);
-                Post::create($attributes);
+                $post = Post::create($attributes);
 
                 Image::make($request->file('image'))->resize(1600, 1066)->save(public_path('media/featured/') . $finalName);
                 
+                // send notifications
+
+                if(Auth::user()->role_id != 1){
+                    $user = User::where('role_id', 1)->get();
+                    Notification::send($user, new NewPostNotification($post, 'admin'));
+                } else {
+                    $users = User::get();
+                    Notification::send($users, new NewPostNotification($post, 'author'));
+                }
+
                 DB::commit();
                 return redirect()->route(app()->master->routePrefix . 'post.index')->with('success', 'Record inserted successfully.');
             } else {
@@ -105,7 +118,6 @@ class PostController extends Controller
             'tags' => Tag::pluck('name', 'id')
         ]);
     }
-
 
     public function update(StorePostRequest $request, $id)
     {

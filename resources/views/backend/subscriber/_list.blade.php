@@ -4,7 +4,7 @@
         <th>#</th>
         <th> Email </th>
         <th> Created At</th>
-        <th class="text-right"><input type="checkbox" class="check_all"></th>
+        <th class="text-right" style="width: 1%"><input type="checkbox" class="check_all"></th>
     </tr>
     </thead>
     <tbody id="ajaxContent">

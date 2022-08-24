@@ -2,9 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Admin;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class MasterAppServiceProvider {
 
@@ -22,7 +20,7 @@ class MasterAppServiceProvider {
 
     public function users()
     {
-        return User::get();
+        return User::pluck('slug')->toArray();
     }
 
     public function urlSegments()
@@ -34,9 +32,10 @@ class MasterAppServiceProvider {
     public function urlPrefix()
     {
         if(is_array($this->urlSegments()) && $this->urlSegments() !== null && !empty($this->urlSegments())){
-            foreach($this->users() as $user){
-                // dd($this->urlSegments());
-                return ($this->urlSegments()[1] === $user->slug) ? $user->slug : '';
+            if(in_array($this->urlSegments()[1], $this->users())){
+                return $this->urlSegments()[1];
+            } else {
+                return "";
             }
         }
     }
@@ -44,8 +43,10 @@ class MasterAppServiceProvider {
     public function routePrefix()
     {
         if(is_array($this->urlSegments()) && $this->urlSegments() !== null){
-            foreach($this->users() as $user){
-                return ($this->urlSegments()[1] === $user->slug) ? $user->slug . "." : '';
+            if(in_array($this->urlSegments()[1], $this->users())){
+                return $this->urlSegments()[1] . '.';
+            } else {
+                return "";
             }
         }
         return '';

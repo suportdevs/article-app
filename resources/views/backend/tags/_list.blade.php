@@ -1,13 +1,13 @@
 <table class="table table-striped">
     <thead class="bg-info">
     <tr>
-        <th>SR</th>
+        <th>#</th>
         <th> Name </th>
         <th> Slug</th>
         <th> Created By </th>
         <th> Created At </th>
         <th>Actions</th>
-        <th><input type="checkbox" class="check_all"></th>
+        <th style="width: 1%" class="text-center"><input type="checkbox" class="check_all"></th>
     </tr>
     </thead>
     <tbody id="ajaxContent">

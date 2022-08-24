@@ -9,7 +9,7 @@
         <th>Created By</th>
         <th>Created At</th>
         <th>Actions</th>
-        <th style="width:50px"><input type="checkbox" class="check_all"></th>
+        <th class="text-right" style="width: 1%"><input type="checkbox" class="check_all"></th>
     </tr>
     </thead>
     <tbody id="ajaxContent">

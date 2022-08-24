@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Services\QueryTriggerService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, QueryTriggerService;
 
     protected $fillable = ['category_id', 'tag_id', 'title', 'slug', 'intro', 'description', 'image', 'status', 'type', 'is_featured', 'created_by', 'updated_by', '_key'];
 
