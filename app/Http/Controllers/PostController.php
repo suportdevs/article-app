@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Subscriber;
 use App\Models\Tag;
 use App\Models\User;
+use App\Notifications\AuthorPostApprove;
 use App\Notifications\NewPostNotification;
+use App\Notifications\SubscriberPostNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -66,11 +69,12 @@ class PostController extends Controller
 
                 if(Auth::user()->role_id != 1){
                     $user = User::where('role_id', 1)->get();
-                    Notification::send($user, new NewPostNotification($post, 'admin'));
-                } else {
-                    $users = User::get();
-                    Notification::send($users, new NewPostNotification($post, 'author'));
+                    Notification::send($user, new NewPostNotification($post, 'author'));
                 }
+                //  else {
+                //     $users = User::get();
+                //     Notification::send($users, new NewPostNotification($post, 'admin'));
+                // }
 
                 DB::commit();
                 return redirect()->route(app()->master->routePrefix . 'post.index')->with('success', 'Record inserted successfully.');
@@ -175,17 +179,24 @@ class PostController extends Controller
                     $data->status = 'Pending';
                 } else {
                     $data->status = 'Published';
+                    // send post approve notification to author
+                    $data->user->notify(new AuthorPostApprove($data));
+
+                    // send post approve notification to subscriber
+                    foreach(Subscriber::get() as $subscriber){
+                        Notification::route('mail', $subscriber->email)->notify(new SubscriberPostNotification($data));
+                    }
                 }
                 if(!$data->save()){
                     throw new \Exception("Error! while saving order record.");
                 }
+
             }
             DB::commit();
             return "Record deleted successfull.";
         }catch(\Exception $e){
             DB::rollBack();
-            return "Record deleted successfull.";
-            return "$e->getMessage()";
+            return "Record deleted successfull. " . $e->getMessage();
         }
     }
 

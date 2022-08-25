@@ -6,23 +6,21 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\Crypt;
 
-class NewPostNotification extends Notification implements ShouldQueue
+class SubscriberPostNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
     public $post;
-    public $postedBy;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($post, $postedBy)
+    public function __construct($post)
     {
         $this->post = $post;
-        $this->postedBy = $postedBy;
     }
 
     /**
@@ -44,15 +42,13 @@ class NewPostNotification extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        if($this->postedBy == 'author'){
-            return (new MailMessage)
-                        ->subject('New post approval needed.')
-                        ->greeting('Hello '. env('APP_NAME'))
-                        ->line('New post by ' . $this->post->user->name . 'need to approve')
-                        ->line('To approve the post click view button')
-                        ->action('View Post', url(route(app()->master->routePrefix . 'post.show', Crypt::encrypt($this->post->id))))
-                        ->line('Thank you for using our application!');
-        }
+        return (new MailMessage)
+                    ->subject(env('APP_NAME') . ' posted a new post.')
+                    ->greeting('Hello Subscriber')
+                    ->line('Posted a new post please view this post.')
+                    ->line('If you are interested.')
+                    ->action('View Post', url('/'))
+                    ->line('Thank you for using our application!');
     }
 
     /**

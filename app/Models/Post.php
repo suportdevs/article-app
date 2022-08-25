@@ -34,4 +34,9 @@ class Post extends Model
             // $query->where('category_id', $category_id);
         });
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
 }

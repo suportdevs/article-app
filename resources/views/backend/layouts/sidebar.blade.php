@@ -24,6 +24,12 @@
                 </ul>
               </div>
             </li>
+            <li class="nav-item {{ request()->is($urlPrefix . '/subscriber*') ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route(app()->master->routePrefix . 'subscriber.index') }}">
+                <span class="icon-bg"><i class="mdi mdi-cube menu-icon"></i></span>
+                <span class="menu-title">Subscriber</span>
+              </a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                 <span class="icon-bg"><i class="mdi mdi-crosshairs-gps menu-icon"></i></span>
