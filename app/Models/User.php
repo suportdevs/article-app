@@ -35,4 +35,11 @@ class User extends Authenticatable
     {
         return $this->belongsTo(UserRole::class, 'role_id', 'id');
     }
+
+    public function scopeFilter($query, $filters)
+    {
+        $query->when($filters->user_name ?? false, function ($query, $name){
+            $query->where('username', 'like', '%' . trim($name) . '%')->orWhere('name', 'like', '%'. trim($name) . '%')->orWhere('email', 'like' . '%' . trim($name) . '%');
+        });
+    }
 }

@@ -11,4 +11,8 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
+    public function getSetting()
+    {
+        return 25;
+    }
 }

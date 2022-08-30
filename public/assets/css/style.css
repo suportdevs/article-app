@@ -14558,13 +14558,16 @@ dl {
         padding: 0; }
         .sidebar .nav.sub-menu .nav-item .nav-link {
           color: #888;
-          padding: 0.75rem 2rem 0.75rem 2rem;
+          padding: 0.75rem 2rem 0.75rem 1.5rem;
           position: relative;
           font-size: 0.8125rem;
           line-height: 1;
           height: auto;
           border-top: 0; }
-          .sidebar .nav.sub-menu .nav-item .nav-link:before {
+          .nav-item .nav-link span.line-icon {
+            margin-right: 20px;
+        }
+          /* .sidebar .nav.sub-menu .nav-item .nav-link:before {
             content: "\F054";
             font-family: "Material Design Icons";
             display: block;
@@ -14574,16 +14577,16 @@ dl {
             -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
             color: #a2a2a2;
-            font-size: .75rem; }
-            .rtl .sidebar .nav.sub-menu .nav-item .nav-link:before {
+            font-size: .75rem; } */
+            /* .rtl .sidebar .nav.sub-menu .nav-item .nav-link:before {
               left: auto;
               right: 0;
-              content: "\F04D"; }
+              content: "\F04D"; } */
           .sidebar .nav.sub-menu .nav-item .nav-link.active {
             color: #44ce42;
             background: transparent; }
-            .sidebar .nav.sub-menu .nav-item .nav-link.active:before {
-              color: #44ce42; }
+            /* .sidebar .nav.sub-menu .nav-item .nav-link.active:before {
+              color: #44ce42; } */
           .sidebar .nav.sub-menu .nav-item .nav-link:hover {
             color: #555555; }
         .sidebar .nav.sub-menu .nav-item:hover {
@@ -14621,8 +14624,11 @@ dl {
     color: #27367f; }
   .sidebar-light .sidebar .nav.sub-menu .nav-item .nav-link {
     color: #444343; }
-    .sidebar-light .sidebar .nav.sub-menu .nav-item .nav-link:before {
-      color: #a2a2a2; }
+    .sidebar-light .sidebar .nav.sub-menu .nav-item .nav-link span.line-icon {
+        margin-right: 20px;
+    }
+    /* .sidebar-light .sidebar .nav.sub-menu .nav-item .nav-link:before {
+      color: #a2a2a2; } */
     .sidebar-light .sidebar .nav.sub-menu .nav-item .nav-link.active {
       color: #444343;
       background: transparent; }
@@ -14854,9 +14860,12 @@ dl {
           margin-left: auto; }
           .rtl.sidebar-icon-only .sidebar .nav.sub-menu .nav-item .nav-link {
             text-align: left; }
-            .rtl.sidebar-icon-only .sidebar .nav.sub-menu .nav-item .nav-link:before {
+            .sidebar-light .sidebar .nav.sub-menu .nav-item .nav-link span.line-icon {
+              margin-right: 20px;
+          }
+            /* .rtl.sidebar-icon-only .sidebar .nav.sub-menu .nav-item .nav-link:before {
               left: unset;
-              right: 0; }
+              right: 0; } */
     .sidebar-icon-only .sidebar .sidebar-actions {
       display: none; }
   .sidebar-icon-only .main-panel {

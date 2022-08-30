@@ -5,20 +5,34 @@
           <ul class="nav">
             <li class="nav-item nav-category">Main</li>
             <li class="nav-item">
-              <a class="nav-link" href="index.html">
-                <span class="icon-bg"><i class="mdi mdi-cube menu-icon"></i></span>
+              <a class="nav-link" href="{{ route(app()->master->routePrefix . 'dashboard') }}">
+                <span class="icon-bg"><i class="icon-home menu-icon"></i></span>
                 <span class="menu-title">Dashboard</span>
               </a>
             </li>
             <li class="nav-item {{ request()->is($urlPrefix . '/tags*') || request()->is($urlPrefix . '/category*') || request()->is($urlPrefix . '/post*') ? ' active' : '' }}">
-              <a class="nav-link" data-bs-toggle="collapse" href="#ui-article" aria-expanded="{{ request()->is($urlPrefix . '/tags*') || request()->is($urlPrefix . '/category*') || request()->is($urlPrefix . '/post*') ? 'true' : 'false' }}" aria-controls="ui-basic">
-                <span class="icon-bg"><i class="mdi mdi-crosshairs-gps menu-icon"></i></span>
-                <span class="menu-title">Artcle</span>
+              <a class="nav-link" data-bs-toggle="collapse" href="#ui-articles" aria-expanded="{{ request()->is($urlPrefix . '/tags*') || request()->is($urlPrefix . '/category*') || request()->is($urlPrefix . '/post*') ? 'true' : 'false' }}" aria-controls="ui-articles">
+                <span class="icon-bg"><i class="icon-docs menu-icon"></i></span>
+                <span class="menu-title">Artcles</span>
                 <i class="menu-arrow"></i>
               </a> 
-              <div class="collapse {{ request()->is($urlPrefix . '/tags*') || request()->is($urlPrefix . '/category*') || request()->is($urlPrefix . '/post*') ? ' show' : '' }}" id="ui-article">
+              <div class="collapse {{ request()->is($urlPrefix . '/tags*') || request()->is($urlPrefix . '/category*') || request()->is($urlPrefix . '/post*') ? ' show' : '' }}" id="ui-articles">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/tags*') ? ' active' : '' }}" href="{{ route(app()->master->routePrefix . 'tags.index') }}">Tags</a></li>
+                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/tags*') ? ' active' : '' }}" href="{{ route(app()->master->routePrefix . 'tags.index') }}"><span class="icon-tag line-icon"></span> Tags</a></li>
+                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/category*') ? ' active' : '' }}" href="{{ route(app()->master->routePrefix . 'category.index') }}"><span class="icon-organization line-icon"></span> Category</a></li>
+                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/post*') ? ' active' : '' }}" href="{{ route(app()->master->routePrefix . 'post.index') }}"><span class="icon-doc line-icon"></span> Posts</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item {{ request()->is($urlPrefix . '/tags*') || request()->is($urlPrefix . '/category*') || request()->is($urlPrefix . '/post*') ? ' active' : '' }}">
+              <a class="nav-link" data-bs-toggle="collapse" href="#ui-users" aria-expanded="{{ request()->is($urlPrefix . '/tags*') || request()->is($urlPrefix . '/category*') || request()->is($urlPrefix . '/post*') ? 'true' : 'false' }}" aria-controls="ui-users">
+                <span class="icon-bg"><i class="icon-people menu-icon"></i></span>
+                <span class="menu-title">Users</span>
+                <i class="menu-arrow"></i>
+              </a> 
+              <div class="collapse {{ request()->is($urlPrefix . '/users*') || request()->is($urlPrefix . '/category*') || request()->is($urlPrefix . '/post*') ? ' show' : '' }}" id="ui-users">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/users*') ? ' active' : '' }}" href="{{ route(app()->master->routePrefix . 'users.index') }}"><span class="icon-people line-icon"></span> Users</a></li>
                   <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/category*') ? ' active' : '' }}" href="{{ route(app()->master->routePrefix . 'category.index') }}">Category</a></li>
                   <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/post*') ? ' active' : '' }}" href="{{ route(app()->master->routePrefix . 'post.index') }}">Posts</a></li>
                 </ul>

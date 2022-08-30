@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Backend\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin'], function () {
@@ -53,5 +54,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin:admin'], function () {
 
     Route::post('admin/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('admin.logout');
-                
+});
+
+Route::post(app()->master->urlPrefix . "/users/delete", [SubscriberController::class, "delete"])->name(app()->master->routePrefix."users.delete");
+Route::group(['prefix' => app()->master->urlPrefix, 'as' => app()->master->routePrefix], function() {
+    Route::resource('/users', UserController::class);
 });
