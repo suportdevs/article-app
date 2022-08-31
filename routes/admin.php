@@ -58,5 +58,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin:admin'], function () {
 
 Route::post(app()->master->urlPrefix . "/users/delete", [SubscriberController::class, "delete"])->name(app()->master->routePrefix."users.delete");
 Route::group(['prefix' => app()->master->urlPrefix, 'as' => app()->master->routePrefix], function() {
+    Route::get("/user/{key}/access", [UserController::class, "access"])->name("user.access");
     Route::resource('/users', UserController::class);
 });

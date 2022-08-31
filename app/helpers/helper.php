@@ -28,3 +28,36 @@ function authenticateUser() {
 
     return Auth::user();
 }
+
+function permissionModules()
+{
+    return [
+        'articles_module' => 'Aritcles Module',
+        'user_module'       => 'User Module',
+        'subscribe_module'       => 'Subscribe Module'
+    ];
+}
+function articles_module()
+{
+    return [
+        'articles_module_list' => 'Aritcles Module List',
+        'user_module_create'       => 'User Module Create',
+        'subscribe_module_edit'       => 'Subscribe Module Edit'
+    ];
+}
+function user_module()
+{
+    return [
+        'articles_module_list' => 'Aritcles Module List',
+        'user_module_create'       => 'User Module Create',
+        'subscribe_module_edit'       => 'Subscribe Module Edit'
+    ];
+}
+function subscribe_module()
+{
+    return [
+        'articles_module_list' => 'Aritcles Module List',
+        'user_module_create'       => 'User Module Create',
+        'subscribe_module_edit'       => 'Subscribe Module Edit'
+    ];
+}

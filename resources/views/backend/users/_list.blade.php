@@ -23,6 +23,7 @@
         <td>
             <a href="{{ route(app()->master->routePrefix . 'post.edit', Crypt::encrypt($data->id)) }}" class="btn btn-primary btn-sm px-1 py-1"><span class="icon-wrench"></span></a>
             <a href="{{ route(app()->master->routePrefix . 'post.show', Crypt::encrypt($data->id)) }}" class="btn btn-success btn-sm px-1 py-1"><span class="icon-screen-desktop"></span></a>
+            <a href="{{ route(app()->master->routePrefix . 'user.access', Crypt::encrypt($data->_key)) }}" class="btn btn-info btn-sm px-1 py-1"><span class="icon-key"></span></a>
         </td>
         <td><input type="checkbox" name="data[]" value="{{ $data->_key }}" class="check_item"></td>
     </tr>

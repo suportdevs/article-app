@@ -84,4 +84,14 @@ class UserController extends Controller
     {
         //
     }
+
+    public function access($key)
+    {
+        $user = User::where('_key', decrypt($key))->first();
+        // dd($user);
+        return view('backend.users.access', [
+            'page_title'        => 'User Permission List',
+            'user' => $user,
+        ]);
+    }
 }
