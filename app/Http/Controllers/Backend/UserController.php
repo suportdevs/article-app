@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserPermission;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -93,5 +95,25 @@ class UserController extends Controller
             'page_title'        => 'User Permission List',
             'user' => $user,
         ]);
+    }
+
+    public function saveAccess(Request $request, $id)
+    {
+        $permission = UserPermission::where('user_id', decrypt($id))->first();
+        $access = json_encode($request->access);
+        if(!is_null($permission)){
+            $model = $permission;
+        } else {
+            $model = new UserPermission();
+        }
+        $model->user_id = $id;
+        $model->items   = $access;
+        $model->created_at = Carbon::now();
+        $model->updated_at = Carbon::now();
+        // if(!$model->save()){
+        //     return back()->with('error', 'Something went wrong while inserting!');
+        // }
+        $model->save();
+        return redirect()->route(app()->master->routePrefix . 'users.index')->with('success', 'Record inserted successfull.');
     }
 }

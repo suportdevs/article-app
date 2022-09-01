@@ -37,27 +37,35 @@ function permissionModules()
         'subscribe_module'       => 'Subscribe Module'
     ];
 }
-function articles_module()
+function permission_module()
 {
     return [
-        'articles_module_list' => 'Aritcles Module List',
-        'user_module_create'       => 'User Module Create',
-        'subscribe_module_edit'       => 'Subscribe Module Edit'
+        'articles_permission_module' => 'Aritcles Permission Module List',
+        'user_permission_module'       => 'User Permission Module',
+        'subscribe_permission_module'       => 'Subscribe Permission Module'
     ];
 }
-function user_module()
-{
+function articles_permission_module(){
     return [
-        'articles_module_list' => 'Aritcles Module List',
-        'user_module_create'       => 'User Module Create',
-        'subscribe_module_edit'       => 'Subscribe Module Edit'
+        'post_list'         => 'Post List',
+        'post_create'       => 'Post Create',
+        'post_edit'         => 'Post Edit',
+        'post_delete'       => 'Post Delete'
     ];
 }
-function subscribe_module()
+function user_permission_module()
 {
     return [
-        'articles_module_list' => 'Aritcles Module List',
-        'user_module_create'       => 'User Module Create',
-        'subscribe_module_edit'       => 'Subscribe Module Edit'
+        'user_list'         => 'User List',
+        'user_create'       => 'User Create',
+        'user_edit'         => 'User Edit',
+        'user_delete'       => 'User Delete'
+    ];
+}
+function subscribe_permission_module()
+{
+    return [
+        'subscription_list' => 'Subscription List',
+        'subscription_delete'       => 'Subscribe Delete'
     ];
 }
