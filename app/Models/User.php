@@ -36,6 +36,11 @@ class User extends Authenticatable
         return $this->belongsTo(UserRole::class, 'role_id', 'id');
     }
 
+    public function permission()
+    {
+        return $this->belongsTo(UserPermission::class, 'user_id');
+    }
+
     public function scopeFilter($query, $filters)
     {
         $query->when($filters->user_name ?? false, function ($query, $name){

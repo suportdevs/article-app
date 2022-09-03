@@ -21,6 +21,7 @@
       </div>
       <form action="{{ route(app()->master->routePrefix .'user.access.store', Crypt::encrypt($user->id)) }}" method="POST">
         @csrf
+        <input type="hidden" name="user_id" value="{{ $user->id }}">
       @foreach(permission_module() as $moduleKey => $moduleName)
       <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
@@ -36,7 +37,7 @@
             </div>
             <div class="body align-items-center {{ $moduleKey }} ">
               @foreach($moduleKey() as $key => $value)
-            <li class="list-group-item" style="float: left;width: 25%;"><label for="{{ $key }}"><input type="checkbox" name="access[{{ $key }}]" value="{{ $value }}" id="{{ $key }}" class="check_item module_heading"> <span>{{ $value }}</span></label></li>
+            <li class="list-group-item" style="float: left;width: 25%;"><label for="{{ $key }}"><input type="checkbox" name="access[{{ $key }}]" value="{{ $value }}" id="{{ $key }}" {{ array_key_exists($key, $permission) ? ' checked' : '' }} class="check_item module_heading"> <span>{{ $value }}</span></label></li>
             @endforeach
             </div>
           </div>

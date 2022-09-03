@@ -90,10 +90,12 @@ class UserController extends Controller
     public function access($key)
     {
         $user = User::where('_key', decrypt($key))->first();
-        // dd($user);
+        $_permission = UserPermission::where('user_id', $user->id)->first();
+        $permission = json_decode($_permission->items ?? '{}', true);
         return view('backend.users.access', [
             'page_title'        => 'User Permission List',
-            'user' => $user,
+            'user'              => $user,
+            'permission'        => $permission
         ]);
     }
 
@@ -102,18 +104,16 @@ class UserController extends Controller
         $permission = UserPermission::where('user_id', decrypt($id))->first();
         $access = json_encode($request->access);
         if(!is_null($permission)){
-            $model = $permission;
+            $permission->update([
+                'user_id'   => $request->user_id,
+                'items'     => $access
+            ]);
         } else {
-            $model = new UserPermission();
+            UserPermission::create([
+                'user_id'   => $request->user_id,
+                'items'     => $access
+            ]);
         }
-        $model->user_id = $id;
-        $model->items   = $access;
-        $model->created_at = Carbon::now();
-        $model->updated_at = Carbon::now();
-        // if(!$model->save()){
-        //     return back()->with('error', 'Something went wrong while inserting!');
-        // }
-        $model->save();
         return redirect()->route(app()->master->routePrefix . 'users.index')->with('success', 'Record inserted successfull.');
     }
 }
