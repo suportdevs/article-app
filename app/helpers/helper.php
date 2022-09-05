@@ -1,9 +1,5 @@
 <?php
 
-// use App\Services\MasterService;
-
-use App\Models\Tag;
-use App\Services\MasterService;
 use Illuminate\Support\Facades\Auth;
 
 function pr($object, $exit = true) {
@@ -47,6 +43,10 @@ function permission_module()
 }
 function articles_permission_module(){
     return [
+        'tag_list'         => 'Tag List',
+        'tag_create'       => 'Tag Create',
+        'tag_edit'         => 'Tag Edit',
+        'tag_delete'       => 'Tag Delete',
         'post_list'         => 'Post List',
         'post_create'       => 'Post Create',
         'post_edit'         => 'Post Edit',

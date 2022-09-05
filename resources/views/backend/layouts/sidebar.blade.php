@@ -10,6 +10,7 @@
                 <span class="menu-title">Dashboard</span>
               </a>
             </li>
+            @can("articles_permission_module")
             <li class="nav-item {{ request()->is($urlPrefix . '/tags*') || request()->is($urlPrefix . '/category*') || request()->is($urlPrefix . '/post*') ? ' active' : '' }}">
               <a class="nav-link" data-bs-toggle="collapse" href="#ui-articles" aria-expanded="{{ request()->is($urlPrefix . '/tags*') || request()->is($urlPrefix . '/category*') || request()->is($urlPrefix . '/post*') ? 'true' : 'false' }}" aria-controls="ui-articles">
                 <span class="icon-bg"><i class="icon-docs menu-icon"></i></span>
@@ -18,12 +19,19 @@
               </a> 
               <div class="collapse {{ request()->is($urlPrefix . '/tags*') || request()->is($urlPrefix . '/category*') || request()->is($urlPrefix . '/post*') ? ' show' : '' }}" id="ui-articles">
                 <ul class="nav flex-column sub-menu">
+                  @can("tag_list")
                   <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/tags*') ? ' active' : '' }}" href="{{ route(app()->master->routePrefix . 'tags.index') }}"><span class="icon-tag line-icon"></span> Tags</a></li>
+                  @endcan
+                  @can("category_list")
                   <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/category*') ? ' active' : '' }}" href="{{ route(app()->master->routePrefix . 'category.index') }}"><span class="icon-organization line-icon"></span> Category</a></li>
+                  @endcan
+                  @can("post_list")
                   <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/post*') ? ' active' : '' }}" href="{{ route(app()->master->routePrefix . 'post.index') }}"><span class="icon-doc line-icon"></span> Posts</a></li>
+                  @endcan
                 </ul>
               </div>
             </li>
+            @endcan
             <li class="nav-item {{ request()->is($urlPrefix . '/tags*') || request()->is($urlPrefix . '/category*') || request()->is($urlPrefix . '/post*') ? ' active' : '' }}">
               <a class="nav-link" data-bs-toggle="collapse" href="#ui-users" aria-expanded="{{ request()->is($urlPrefix . '/tags*') || request()->is($urlPrefix . '/category*') || request()->is($urlPrefix . '/post*') ? 'true' : 'false' }}" aria-controls="ui-users">
                 <span class="icon-bg"><i class="icon-people menu-icon"></i></span>

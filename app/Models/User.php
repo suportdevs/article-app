@@ -38,7 +38,7 @@ class User extends Authenticatable
 
     public function permission()
     {
-        return $this->belongsTo(UserPermission::class, 'user_id');
+        return $this->hasOne(UserPermission::class, 'user_id', 'id');
     }
 
     public function scopeFilter($query, $filters)

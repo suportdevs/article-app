@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
@@ -25,6 +27,18 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::before(function(User $user, $ability) {
+            if($user->role_id == 1){
+                return true;
+            }
+            return $this->hasPermission($ability);
+        });
     }
+        private function hasPermission($ability)
+        {
+            $permissions = Auth::user()->permission->items ?? "{}";
+            $permissions = json_decode($permissions, true);
+            // dd(array_key_exists($ability, $permissions));
+            return array_key_exists($ability, $permissions);
+        }
 }
