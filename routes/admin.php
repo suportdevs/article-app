@@ -61,4 +61,7 @@ Route::group(['prefix' => app()->master->urlPrefix, 'as' => app()->master->route
     Route::get("/user/{key}/access", [UserController::class, "access"])->name("user.access");
     Route::post("/user/{id}/access", [UserController::class, "saveAccess"])->name("user.access.store");
     Route::resource('/users', UserController::class);
+    Route::get('/profile/{id}/edit', [UserController::class, 'profile'])->name('profile.edit');
+    Route::get('/profile/{id}/update', [UserController::class, 'profile'])->name('profile.update');
+    Route::get('/profile/{id}/show', [UserController::class, 'profile'])->name('profile.show');
 });

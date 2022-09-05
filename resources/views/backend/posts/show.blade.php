@@ -1,5 +1,4 @@
 <x-admin-layout>
-
   
   <x-breadcrumbs :title="$page_title">
     <a href="{{ route(app()->master->routePrefix . 'dashboard') }}" class="text-sm text-dark text-decoration-none py-0 ">Home > </a>

@@ -14,6 +14,7 @@ use App\Notifications\SubscriberPostNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Notification;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Str;
@@ -22,6 +23,7 @@ class PostController extends Controller
 {
     public function index(Request $request)
     {
+        Gate::authorize('post_list');
         $paginateCount = $request->item_count ?? 25;
         $view = $request->ajax() ? 'backend.posts._list' : 'backend.posts.index';
 
@@ -35,7 +37,7 @@ class PostController extends Controller
 
     public function create()
     {
-        // dd($user = User::where('role_id', 1)->get());
+        Gate::authorize("post_create");
         return view('backend.posts.create', [
             'page_title' => 'Post',
             'categories' => Category::pluck('name', 'id'),
@@ -107,6 +109,7 @@ class PostController extends Controller
 
     public function show($id)
     {
+        Gate::authorize("post_show");
         return view('backend.posts.show', [
             'page_title'    => 'Post Details',
             'data'          => Post::find(decrypt($id))
@@ -115,6 +118,7 @@ class PostController extends Controller
 
     public function edit($id)
     {
+        Gate::authorize("post_edit");
         return view('backend.posts.edit', [
             'page_title' => 'Post',
             'data' => Post::find(decrypt($id)),
@@ -170,6 +174,7 @@ class PostController extends Controller
     }
     public function approved(Request $request)
     {
+        Gate::authorize("post_approved");
         DB::beginTransaction();
         try{
             foreach($request->data as $key){
@@ -202,6 +207,7 @@ class PostController extends Controller
 
     public function delete(Request $request)
     {
+        Gate::authorize("post_delete");
         DB::beginTransaction();
         try{
             foreach($request->data as $key){

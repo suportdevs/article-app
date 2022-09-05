@@ -116,4 +116,13 @@ class UserController extends Controller
         }
         return redirect()->route(app()->master->routePrefix . 'users.index')->with('success', 'Record inserted successfull.');
     }
+
+    public function profile($key)
+    {
+        $user = User::where('id', decrypt($key))->first();
+        return view('backend.users.edit', [
+            'page_title'        => 'User Profile',
+            'data'              => $user,
+        ]);
+    }
 }
