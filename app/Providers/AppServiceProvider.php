@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\Controller;
 use App\Services\MasterAppServiceProvider;
-use App\Services\MasterService;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         app()->bind('master', function(){
-            return new MasterAppServiceProvider();
+            return new Controller();
         });
         Paginator::useBootstrap();
     }

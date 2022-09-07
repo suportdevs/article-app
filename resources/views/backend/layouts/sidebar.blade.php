@@ -41,7 +41,7 @@
               <div class="collapse {{ request()->is($urlPrefix . '/users*') || request()->is($urlPrefix . '/category*') || request()->is($urlPrefix . '/post*') ? ' show' : '' }}" id="ui-users">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/users*') ? ' active' : '' }}" href="{{ route(app()->master->routePrefix . 'users.index') }}"><span class="icon-people line-icon"></span> Users</a></li>
-                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/category*') ? ' active' : '' }}" href="{{ route(app()->master->routePrefix . 'category.index') }}">Category</a></li>
+                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/profile*') ? ' active' : '' }}" href="{{ route(app()->master->routePrefix . 'profile.index') }}"><span class="icon-user line-icon"></span> Profile</a></li>
                   <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/post*') ? ' active' : '' }}" href="{{ route(app()->master->routePrefix . 'post.index') }}">Posts</a></li>
                 </ul>
               </div>

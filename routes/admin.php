@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Backend\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin'], function () {
@@ -61,7 +62,5 @@ Route::group(['prefix' => app()->master->urlPrefix, 'as' => app()->master->route
     Route::get("/user/{key}/access", [UserController::class, "access"])->name("user.access");
     Route::post("/user/{id}/access", [UserController::class, "saveAccess"])->name("user.access.store");
     Route::resource('/users', UserController::class);
-    Route::get('/profile/{id}/edit', [UserController::class, 'profile'])->name('profile.edit');
-    Route::get('/profile/{id}/update', [UserController::class, 'profile'])->name('profile.update');
-    Route::get('/profile/{id}/show', [UserController::class, 'profile'])->name('profile.show');
+    Route::resource('/profile', UserProfileController::class);
 });

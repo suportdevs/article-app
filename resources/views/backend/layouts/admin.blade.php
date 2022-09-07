@@ -21,13 +21,14 @@
   
   <!-- ***** Preloader Start ***** -->
   <div id="preloader">
-        <div class="jumper">
-            <div class="item"></div>
-            <div class="item"></div>
-            <div class="item"></div>
-            <div id="loading-text" class="mt-5 text-dark"><img src="{{ asset('assets/images/loader.gif') }}" alt=""></div>
-          </div>
-    </div>
+      <div class="jumper">
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div id="loading-text" class="mt-5 text-dark"><img src="{{ asset('assets/images/loader.gif') }}" alt=""></div>
+        </div>
+  </div>
+  
     <!-- ***** Preloader End ***** -->
     <body class="font-sans antialiased">
         <div class="container-scroller">
