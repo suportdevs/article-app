@@ -2,26 +2,23 @@
 
 namespace App\Providers;
 
-use App\Http\Controllers\Controller;
 use App\Services\MasterAppServiceProvider;
-use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+class MasterProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * Register services.
      *
      * @return void
      */
     public function register()
     {
-
+        //
     }
 
     /**
-     * Bootstrap any application services.
+     * Bootstrap services.
      *
      * @return void
      */
@@ -29,8 +26,6 @@ class AppServiceProvider extends ServiceProvider
     {
         app()->bind('master', function(){
             return new MasterAppServiceProvider();
-            MasterAppServiceProvider::getAuth(Auth::user());
         });
-        Paginator::useBootstrap();
     }
 }
