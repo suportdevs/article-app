@@ -1,6 +1,6 @@
 <?php
   $urlPrefix = app()->master->urlPrefix;
-  // dd(app());
+  // dd(authenticateUser());
 ?>
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
           <ul class="nav">

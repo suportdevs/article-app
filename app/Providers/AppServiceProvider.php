@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Http\Controllers\Controller;
 use App\Services\MasterAppServiceProvider;
+use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
@@ -27,10 +28,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        app()->bind('master', function(){
-            return new MasterAppServiceProvider();
-            MasterAppServiceProvider::getAuth(Auth::user());
-        });
+        // if(Auth::check()){
+            app()->bind('master', function(){
+                return new MasterAppServiceProvider();
+            });
+        // }
         Paginator::useBootstrap();
     }
 }

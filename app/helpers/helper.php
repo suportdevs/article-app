@@ -21,8 +21,7 @@ function articleStatus()
 }
 
 function authenticateUser() {
-
-    return Auth::user();
+    return Auth::check();
 }
 
 function permissionModules()

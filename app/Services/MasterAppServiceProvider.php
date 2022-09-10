@@ -4,20 +4,21 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Models\UserPermission;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class MasterAppServiceProvider extends Controller {
 
     public Array $users = [];
-    public static $currentUserId;
+    public $currentUserId;
     public $permitId;
     public Array $urlSegments = [];
     public $urlPrefix;
     public $routePrefix;
     public function __construct()
     {   
-        $this->middleware('web');
+        $this->middleware('auth');
             // $this->currentUserId = Auth::id();
             $this->permitId = UserPermission::where('user_id', Auth::id())->pluck('user_id')->toArray();
             $this->urlSegments = $this->urlSegments();
@@ -39,8 +40,7 @@ class MasterAppServiceProvider extends Controller {
 
     public function urlPrefix()
     {
-        dd(self::$currentUserId);
-        if(in_array(self::$currentUserId, $this->permitId)){
+        // if(self::currentU()){
             if(is_array($this->urlSegments()) && $this->urlSegments() !== null && !empty($this->urlSegments())){
                 if(in_array($this->urlSegments()[1], $this->users())){
                     return $this->urlSegments()[1];
@@ -48,7 +48,7 @@ class MasterAppServiceProvider extends Controller {
                     return "";
                 }
             }
-        }
+        // }
     }
 
     public function routePrefix()
@@ -63,14 +63,9 @@ class MasterAppServiceProvider extends Controller {
         return '';
     }
 
-    public function currentUser()
+    public function currentUser(Request $request)
     {
-        return UserPermission::where('user_id', Auth::id())->first();
+        $currentUserId = $request->user();
+        return $currentUserId;
     }
-
-    public static function getAuth($auth)
-    {
-        return self::$currentUserId = $auth;
-    }
-
 }

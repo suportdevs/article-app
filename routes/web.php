@@ -1,10 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
 $urlPrefix = app()->master->urlPrefix;
 $routePrefix = app()->master->routePrefix;
-// dd(Auth::user());
+// dd(authenticateUser());
 
 Route::get('/', function () {
     return view('welcome');
