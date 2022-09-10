@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Controller;
+use App\Services\MasterAppServiceProvider;
 use Illuminate\Support\Facades\Auth;
 
 function pr($object, $exit = true) {
@@ -67,4 +69,8 @@ function subscribe_permission_module()
         'subscription_list' => 'Subscription List',
         'subscription_delete'       => 'Subscribe Delete'
     ];
+}
+
+function master(){
+    return new Controller();
 }

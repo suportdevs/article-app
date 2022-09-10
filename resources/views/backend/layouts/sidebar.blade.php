@@ -1,12 +1,17 @@
 <?php
-  $urlPrefix = app()->master->urlPrefix;
-  // dd(authenticateUser());
+
+use Illuminate\Support\Facades\Auth;
+
+if(in_array(Auth::id(), master()->permitId)){
+  $urlPrefix = master()->urlPrefix;
+  $routePrefix = master()->routePrefix;
+}
 ?>
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
           <ul class="nav">
             <li class="nav-item nav-category">Main</li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route(app()->master->routePrefix . 'dashboard') }}">
+              <a class="nav-link" href="{{ route($routePrefix . 'dashboard') }}">
                 <span class="icon-bg"><i class="icon-home menu-icon"></i></span>
                 <span class="menu-title">Dashboard</span>
               </a>
@@ -21,13 +26,13 @@
               <div class="collapse {{ request()->is($urlPrefix . '/tags*') || request()->is($urlPrefix . '/category*') || request()->is($urlPrefix . '/post*') ? ' show' : '' }}" id="ui-articles">
                 <ul class="nav flex-column sub-menu">
                   @can("tag_list")
-                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/tags*') ? ' active' : '' }}" href="{{ route(app()->master->routePrefix . 'tags.index') }}"><span class="icon-tag line-icon"></span> Tags</a></li>
+                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/tags*') ? ' active' : '' }}" href="{{ route($routePrefix . 'tags.index') }}"><span class="icon-tag line-icon"></span> Tags</a></li>
                   @endcan
                   @can("category_list")
-                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/category*') ? ' active' : '' }}" href="{{ route(app()->master->routePrefix . 'category.index') }}"><span class="icon-organization line-icon"></span> Category</a></li>
+                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/category*') ? ' active' : '' }}" href="{{ route($routePrefix . 'category.index') }}"><span class="icon-organization line-icon"></span> Category</a></li>
                   @endcan
                   @can("post_list")
-                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/post*') ? ' active' : '' }}" href="{{ route(app()->master->routePrefix . 'post.index') }}"><span class="icon-doc line-icon"></span> Posts</a></li>
+                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/post*') ? ' active' : '' }}" href="{{ route($routePrefix . 'post.index') }}"><span class="icon-doc line-icon"></span> Posts</a></li>
                   @endcan
                 </ul>
               </div>
@@ -41,14 +46,14 @@
               </a> 
               <div class="collapse {{ request()->is($urlPrefix . '/users*') || request()->is($urlPrefix . '/category*') || request()->is($urlPrefix . '/post*') ? ' show' : '' }}" id="ui-users">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/users*') ? ' active' : '' }}" href="{{ route(app()->master->routePrefix . 'users.index') }}"><span class="icon-people line-icon"></span> Users</a></li>
-                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/profile*') ? ' active' : '' }}" href="{{ route(app()->master->routePrefix . 'profile.index') }}"><span class="icon-user line-icon"></span> Profile</a></li>
-                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/post*') ? ' active' : '' }}" href="{{ route(app()->master->routePrefix . 'post.index') }}">Posts</a></li>
+                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/users*') ? ' active' : '' }}" href="{{ route($routePrefix . 'users.index') }}"><span class="icon-people line-icon"></span> Users</a></li>
+                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/profile*') ? ' active' : '' }}" href="{{ route($routePrefix . 'profile.index') }}"><span class="icon-user line-icon"></span> Profile</a></li>
+                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/post*') ? ' active' : '' }}" href="{{ route($routePrefix . 'post.index') }}">Posts</a></li>
                 </ul>
               </div>
             </li>
             <li class="nav-item {{ request()->is($urlPrefix . '/subscriber*') ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route(app()->master->routePrefix . 'subscriber.index') }}">
+              <a class="nav-link" href="{{ route($routePrefix . 'subscriber.index') }}">
                 <span class="icon-bg"><i class="mdi mdi-cube menu-icon"></i></span>
                 <span class="menu-title">Subscriber</span>
               </a>

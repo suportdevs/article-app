@@ -2,15 +2,15 @@
 
 namespace App\Services;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\UserPermission;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class MasterAppServiceProvider extends Controller {
+class MasterAppServiceProvider {
 
-    public Array $users = [];
+    public $users = null;
+    public $project;
     public $currentUserId;
     public $permitId;
     public Array $urlSegments = [];
@@ -18,17 +18,14 @@ class MasterAppServiceProvider extends Controller {
     public $routePrefix;
     public function __construct()
     {   
-        $this->middleware('auth');
-            // $this->currentUserId = Auth::id();
-            $this->permitId = UserPermission::where('user_id', Auth::id())->pluck('user_id')->toArray();
-            $this->urlSegments = $this->urlSegments();
-            $this->urlPrefix = $this->urlPrefix();
-            $this->routePrefix = $this->routePrefix();
+        $this->permitId = UserPermission::where('user_id', Auth::id())->pluck('user_id')->toArray();
+        $this->urlSegments = $this->urlSegments();
+        $this->urlPrefix = $this->urlPrefix();
+        $this->routePrefix = $this->routePrefix();
     }
 
     public function users()
     {
-        // dd(Auth::user());
         return User::pluck('slug')->toArray();
     }
 
@@ -40,7 +37,7 @@ class MasterAppServiceProvider extends Controller {
 
     public function urlPrefix()
     {
-        // if(self::currentU()){
+        // if($this->projects){
             if(is_array($this->urlSegments()) && $this->urlSegments() !== null && !empty($this->urlSegments())){
                 if(in_array($this->urlSegments()[1], $this->users())){
                     return $this->urlSegments()[1];
@@ -48,7 +45,7 @@ class MasterAppServiceProvider extends Controller {
                     return "";
                 }
             }
-        // }
+            // }
     }
 
     public function routePrefix()
@@ -63,9 +60,8 @@ class MasterAppServiceProvider extends Controller {
         return '';
     }
 
-    public function currentUser(Request $request)
+    public function current($user)
     {
-        $currentUserId = $request->user();
-        return $currentUserId;
+        return $this->users = $user;
     }
 }

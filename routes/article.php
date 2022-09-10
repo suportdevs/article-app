@@ -4,11 +4,10 @@ use App\Http\Controllers\Backend\SubscriberController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
-$urlPrefix = app()->master->urlPrefix;
-$routePrefix = app()->master->routePrefix;
+// dd(authenticateUser());
+$urlPrefix = master()->urlPrefix;
+$routePrefix = master()->routePrefix;
 
 // Tags Routes
 Route::post("$urlPrefix/tags/delete", [TagController::class, "delete"])->name($routePrefix."tags.delete");

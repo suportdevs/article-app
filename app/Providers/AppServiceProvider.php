@@ -29,9 +29,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // if(Auth::check()){
-            app()->bind('master', function(){
-                return new MasterAppServiceProvider();
-            });
+            // app()->bind('master', function(){
+            //     return new MasterAppServiceProvider();
+            // });
         // }
         Paginator::useBootstrap();
     }
