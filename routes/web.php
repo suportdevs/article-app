@@ -2,8 +2,10 @@
 
 use App\Services\MasterAppServiceProvider;
 use App\Traits\Master;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-dd(new MasterAppServiceProvider());
+Route::group(function() {
+dd(Auth::user());
 $urlPrefix = master()->urlPrefix;
 $routePrefix = master()->routePrefix;
 
@@ -23,4 +25,6 @@ Route::get($urlPrefix .'/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth'])->name('dashboard');
 
+    
+});
 require __DIR__.'/auth.php';
