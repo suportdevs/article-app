@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class RedirectIfAuthenticated
+class CustomProtect
 {
     /**
      * Handle an incoming request.
@@ -20,13 +20,13 @@ class RedirectIfAuthenticated
     public function handle(Request $request, Closure $next, ...$guards)
     {
         $guards = empty($guards) ? [null] : $guards;
+        $permission = auth()->user()->permission ?? null;
         foreach ($guards as $guard) {
-            if (Auth::guard('web')->check()) {
-                dd(Auth::user());
-                return redirect(RouteServiceProvider::HOME);
+            if (is_null($permission)) {
+                return $next($request);
             }
         }
+        return redirect()->back();
 
-        return $next($request);
     }
 }

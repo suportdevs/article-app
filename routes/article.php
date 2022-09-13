@@ -5,7 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
-// dd(authenticateUser());
+// dd();
 $urlPrefix = master()->urlPrefix;
 $routePrefix = master()->routePrefix;
 
@@ -17,7 +17,7 @@ Route::group(["prefix" => "$urlPrefix", "as" => "$routePrefix"], function() {
 
 // Category Routes
 Route::post("$urlPrefix/category/delete", [CategoryController::class, "delete"])->name($routePrefix."category.delete");
-Route::group(["prefix" => "$urlPrefix", "as" => "$routePrefix"], function() {
+Route::group(["prefix" => "$urlPrefix", "as" => "$routePrefix", 'middleware' => ['custom']], function() {
     Route::resource("/category", CategoryController::class);
 });
 

@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Auth;
 if(in_array(Auth::id(), master()->permitId)){
   $urlPrefix = master()->urlPrefix;
   $routePrefix = master()->routePrefix;
+
+  // dd(auth()->id());
+
 }
 ?>
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
