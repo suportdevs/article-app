@@ -83,4 +83,9 @@ class Controller extends BaseController
     {
         return $this->users = $user;
     }
+
+    public function getSetting()
+    {
+        return 25;
+    }
 }
