@@ -27,7 +27,7 @@ class UserProfileController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**

@@ -62,5 +62,6 @@ Route::group(['prefix' => 'suportdevs', 'as' => 'suportdevs.'], function() {
     Route::get("/user/{key}/access", [UserController::class, "access"])->name("user.access");
     Route::post("/user/{id}/access", [UserController::class, "saveAccess"])->name("user.access.store");
     Route::resource('/users', UserController::class);
+    Route::get('/profile-update', [UserProfileController::class, 'profileUpdate'])->name('suportdevs.profile-update');
     Route::resource('/profile', UserProfileController::class);
 });
