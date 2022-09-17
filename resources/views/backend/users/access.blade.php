@@ -29,7 +29,7 @@
             <div class="card-title bg-info d-flex justify-content-between align-items-center m-0">
               <div class="d-flex align-items-center">
                 <label for="{{ $moduleKey }}" class="ms-3">
-                  <input type="checkbox" class="module_heading" name="access[{{ $moduleKey }}]" id="{{ $moduleKey }}" data-rel="{{ $moduleKey }}" value="{{ $moduleName }}" {{ array_key_exists($moduleKey, $permission) ? 'checked' : ''}}>
+                  <input type="checkbox" class="check_item module_heading" name="access[{{ $moduleKey }}]" id="{{ $moduleKey }}" data-rel="{{ $moduleKey }}" value="{{ $moduleName }}" {{ array_key_exists($moduleKey, $permission) ? 'checked' : ''}}>
                   {{ $moduleName }}
                 </label>
               </div>

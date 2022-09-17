@@ -2,14 +2,15 @@
   
   <x-breadcrumbs :title="$page_title">
     <a href="{{ route(app()->master->routePrefix . 'dashboard') }}" class="text-sm text-dark text-decoration-none py-0 ">Home > </a>
-    <a href="{{ route(app()->master->routePrefix . 'post.index') }}" class="text-sm text-dark text-decoration-none py-0 "> Post > </a>
+    <a href="{{ route(app()->master->routePrefix . 'user.index') }}" class="text-sm text-dark text-decoration-none py-0"> User > </a>
     <a > Edit</a>
   </x-breadcrumbs>
-
+  
+<div class="content-wrapper p-4">
     <div class="row">
       <div class="col-lg-8 grid-margin stretch-card">
         <div class="card">
-          <div class="card-body">
+          <div class="card-body p-4">
             @if ($errors->any())
               <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <ul class="m-0">

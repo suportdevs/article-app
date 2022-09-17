@@ -61,7 +61,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view("backend.users.edit", [
+            'page_title'    => "User Edit",
+            'data'          => User::find(decrypt($id))
+        ]);
     }
 
     /**

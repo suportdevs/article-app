@@ -40,7 +40,6 @@
                 <!-- Page Content -->
                 
               <div class="main-panel">
-                <div class="content-wrapper p-4">
                   
                 {{ $slot }}
                 

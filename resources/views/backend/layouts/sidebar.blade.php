@@ -49,8 +49,8 @@ if(in_array(Auth::id(), master()->permitId)){
               </a> 
               <div class="collapse {{ request()->is($urlPrefix . '/users*') || request()->is($urlPrefix . '/category*') || request()->is($urlPrefix . '/post*') ? ' show' : '' }}" id="ui-users">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/user*') ? ' active' : '' }}" href="{{ route($routePrefix . 'user.index') }}"><span class="icon-people line-icon"></span> Users</a></li>
-                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/profile*') ? ' active' : '' }}" href="{{ route($routePrefix . 'profile', auth()->user()->_key) }}"><span class="icon-user line-icon"></span> Profile</a></li>
+                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/users*') ? ' active' : '' }}" href="{{ route($routePrefix . 'user.index') }}"><span class="icon-people line-icon"></span> Users</a></li>
+                  <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/profile*') ? ' active' : '' }}" href="{{ route($routePrefix . 'profile.index') }}"><span class="icon-user line-icon"></span> Profile</a></li>
                   <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/post*') ? ' active' : '' }}" href="{{ route($routePrefix . 'post.index') }}">Posts</a></li>
                 </ul>
               </div>
