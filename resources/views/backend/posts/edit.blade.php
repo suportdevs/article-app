@@ -6,10 +6,11 @@
     <a > Edit</a>
   </x-breadcrumbs>
 
+  <div class="content-wrapper p-4">
     <div class="row">
       <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
-          <div class="card-body">
+          <div class="card-body p-4">
             @if ($errors->any())
               <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <ul class="m-0">
