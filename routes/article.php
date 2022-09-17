@@ -5,7 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
-// dd();
+// dd(app()->master);
 $urlPrefix = master()->urlPrefix;
 $routePrefix = master()->routePrefix;
 

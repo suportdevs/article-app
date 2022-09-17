@@ -9,14 +9,11 @@ use Illuminate\Http\Request;
 
 class UserProfileController extends Controller
 {
-    public function index(Request $request)
+    public function index($key)
     {
-        $item_count = $request->item_count ?? $this->getSetting();
-        $view = $request->ajax() ? 'backend.profile._list' : 'backend.profile.index';
-
-        return view($view, [
+        return view("backend.profile.index", [
             'page_title'    => 'User Profile',
-            'dataset'       => User::filter($request)->orderBy('id', 'DESC')->paginate($item_count)
+            'dataset'       => User::where("_key", $key)->firstOrFail()
         ]);
     }
 
@@ -86,6 +83,19 @@ class UserProfileController extends Controller
         //
     }
 
+    public function profileUpdate($key)
+    {
+        
+    }
+    
+    public function profile($key)
+    {
+        return view("backend.profile.index", [
+            'page_title'    => 'User Profile',
+            'dataset'       => User::where("_key", $key)->firstOrFail()
+        ]);
+    }
+
     public function access($key)
     {
         $user = User::where('_key', decrypt($key))->first();
@@ -116,7 +126,7 @@ class UserProfileController extends Controller
         return redirect()->route(app()->master->routePrefix . 'profile.index')->with('success', 'Record inserted successfull.');
     }
 
-    public function profile($key)
+    public function profileEdit($key)
     {
         $user = User::where('id', decrypt($key))->first();
         return view('backend.profile.edit', [

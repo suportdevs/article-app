@@ -58,10 +58,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin:admin'], function () {
 });
 
 Route::post("suportdevs/users/delete", [SubscriberController::class, "delete"])->name("suportdevs.users.delete");
-Route::group(['prefix' => 'suportdevs', 'as' => 'suportdevs.'], function() {
+Route::group(['prefix' => app()->master->urlPrefix, 'as' => app()->master->routePrefix], function() {
     Route::get("/user/{key}/access", [UserController::class, "access"])->name("user.access");
     Route::post("/user/{id}/access", [UserController::class, "saveAccess"])->name("user.access.store");
-    Route::resource('/users', UserController::class);
-    Route::get('/profile-update', [UserProfileController::class, 'profileUpdate'])->name('suportdevs.profile-update');
-    Route::resource('/profile', UserProfileController::class);
+    Route::resource('/user', UserController::class);
+    Route::get('/profile/{key}', [UserProfileController::class, 'profile'])->name('profile');
+    Route::get('/profile/{key}/show', [UserProfileController::class, 'profile'])->name('profile.show');
+    Route::get('/profile/{key}/edit', [UserProfileController::class, 'profileEdit'])->name('profile.edit');
+    Route::get('/profile-update/{key}', [UserProfileController::class, 'profileUpdate'])->name('profile-update');
 });

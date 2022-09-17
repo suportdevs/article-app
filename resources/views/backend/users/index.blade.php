@@ -15,13 +15,13 @@
                 <p class="m-0">Users Management Database</p>
               </div>
               <div>
-                <a href="{{ route(app()->master->routePrefix . 'users.create') }}" class="btn btn-success btn-sm px-1 py-1"><span class="icon-plus"></span> New</a>
+                <a href="{{ route(app()->master->routePrefix . 'user.create') }}" class="btn btn-success btn-sm px-1 py-1"><span class="icon-plus"></span> New</a>
                 <button class="btn btn-danger btn-sm px-1 py-1" id="deleteMultiple" disabled><span class="icon-trash"></span> Delete</button>
               </div>
             </div>
             <div class="d-block">
               <div class="row">
-                <form action="{{ route(app()->master->routePrefix.'users.index') }}" method="GET" id="searchForm">
+                <form action="{{ route(app()->master->routePrefix.'user.index') }}" method="GET" id="searchForm">
                   @csrf
                   <div class="input-group mb-3">
                     <div class="col-md-1" style="width: 50px;">

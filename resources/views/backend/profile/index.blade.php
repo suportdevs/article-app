@@ -15,7 +15,7 @@
                 <p class="m-0">User Profile Management Database</p>
               </div>
               <div>
-                <a href="{{ route(app()->master->routePrefix . 'profile-update') }}" class="btn btn-success btn-sm px-1 py-1"><span class="icon-plus"></span> New</a>
+                <a href="{{ route(app()->master->routePrefix . 'profile-update/') }}" class="btn btn-success btn-sm px-1 py-1"><span class="icon-plus"></span> Update</a>
                 <button class="btn btn-danger btn-sm px-1 py-1" id="deleteMultiple" disabled><span class="icon-trash"></span> Delete</button>
               </div>
             </div>
