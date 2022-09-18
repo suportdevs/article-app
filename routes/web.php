@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Fontend\HomeController;
 use App\Services\MasterAppServiceProvider;
 use App\Traits\Master;
 use Illuminate\Support\Facades\Artisan;
@@ -18,20 +19,10 @@ Route::get('/view-clear', function () {
     return redirect()->back()->with('success', 'Page Refresh Successfull');
 })->name('viewClear');
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-// Route::get($urlPrefix .'/dashboard', function () {
-//     return view('backend.dashboard');
-// })->middleware(['admin:admin'])->name($routePrefix.'dashboard');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get($urlPrefix .'/dashboard', function () {    
     return view('backend.dashboard');
 })->middleware(['auth'])->name($routePrefix.'dashboard');
-
-// Route::get('dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
