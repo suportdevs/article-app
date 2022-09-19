@@ -84,7 +84,7 @@
                         <nav class="navbar navbar-expand-lg">
                             <!-- <div class="container-fluid"> -->
                                 <a class="navbar-brand" href="index.html">
-                                    <img src="assets/images/logo.svg" alt="Logo">
+                                    <img src="{{ asset('assets/fontend/images/logo.svg') }}" alt="Logo">
                                 </a>
                               <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-content">
                                 <div class="hamburger-toggle">
@@ -194,7 +194,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="header-hero-image text-center ">
-                            <img src="{{ asset($data->image) }}" alt="hero">
+                            <img src="{{ asset($data->image) }}" alt="{{ $data->title }}">
                         </div> <!-- header hero image -->
                     </div>
                 </div> <!-- row -->
@@ -206,36 +206,6 @@
     </header>
     
     <!--====== HEADER PART ENDS ======-->
-    
-    <!--====== BRAMD PART START ======-->
-    
-    <div class="brand-area pt-90">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="brand-logo d-flex align-items-center justify-content-center justify-content-md-between">
-                        <div class="single-logo mt-30 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
-                            <img src="assets/images/brand-1.png" alt="brand">
-                        </div> <!-- single logo -->
-                        <div class="single-logo mt-30 wow fadeIn" data-wow-duration="1.5s" data-wow-delay="0.2s">
-                            <img src="assets/images/brand-2.png" alt="brand">
-                        </div> <!-- single logo -->
-                        <div class="single-logo mt-30 wow fadeIn" data-wow-duration="1.5s" data-wow-delay="0.3s">
-                            <img src="assets/images/brand-3.png" alt="brand">
-                        </div> <!-- single logo -->
-                        <div class="single-logo mt-30 wow fadeIn" data-wow-duration="1.5s" data-wow-delay="0.4s">
-                            <img src="assets/images/brand-4.png" alt="brand">
-                        </div> <!-- single logo -->
-                        <div class="single-logo mt-30 wow fadeIn" data-wow-duration="1.5s" data-wow-delay="0.5s">
-                            <img src="assets/images/brand-5.png" alt="brand">
-                        </div> <!-- single logo -->
-                    </div> <!-- brand logo -->
-                </div>
-            </div>   <!-- row -->
-        </div> <!-- container -->
-    </div>
-    
-    <!--====== BRAMD PART ENDS ======-->
     
     <!--====== SERVICES PART START ======-->
     
@@ -312,20 +282,19 @@
             </div> <!-- row -->
             <div class="row justify-content-center">
                 <div class="col-md-8 col-sm-8">
+                    @foreach($posts as $post)
                     <div class="post post-list clearfix align-items-center rounded bordered">
                         <div class="thumb rounded">
-                            <!-- <a href="#"> -->
-                                <div class="inner">
-                                    <img src="assets/images/team-1.png" alt="">
-                                </div>
-                            <!-- </a> -->
+                            <div class="inner">
+                                <img src="{{ asset($post->image)}}" alt="{{ $post->title }}">
+                            </div>
                         </div>
                         <div class="details padding-20 ">
                             <ul class="meta list-inline mb-3">
                                 <li class="list-inline-item">
                                     <a href="#">
-                                        <img src="images/other/author-sm.jpg" class="author" alt="">
-                                        Techie Coder
+                                        <img src="{{ asset('images/other/author-sm.jpg') }}" class="author" alt="">
+                                        {{ $post->user->username ?? ''}}
                                     </a>
                                 </li>
                                 <li class="list-inline-item">
@@ -335,12 +304,11 @@
                             </ul>
                             <h5 class="post-tile">
                                 <a href="#">
-                                    Sensex closes 380pts higher, Nifty at 15,302; metal, power drag
+                                    {{ $post->title }}
                                 </a>
                             </h5>
                             <p class="excerpt mb-0">
-                                This is Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi,
-                                iure.
+                                {{ $post->intro }}
                             </p>
                             <div class="post-bottom clearfix d-flex align-items-center">
                                 <div class="social-share me-auto">
@@ -372,66 +340,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="post post-list clearfix padding-20 rounded bordered">
-                        <div class="thumb rounded">
-                            <a href="#">
-                                <div class="inner">
-                                    <img src="assets/images/banner-right-image.png" alt="">
-                                </div>
-                            </a>
-                        </div>
-                        <div class="details">
-                            <ul class="meta list-inline mb-3">
-                                <li class="list-inline-item">
-                                    <a href="#">
-                                        <img src="images/other/author-sm.jpg" class="author" alt="">
-                                        Techie Coder
-                                    </a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#">Finance</a>
-                                </li>
-                                <li class="list-inline-item">26 May 2021</li>
-                            </ul>
-                            <h5 class="post-tile">
-                                <a href="#">
-                                    Sensex closes 380pts higher, Nifty at 15,302; metal, power drag
-                                </a>
-                            </h5>
-                            <p class="excerpt mb-0">
-                                This is Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi,
-                                iure.
-                            </p>
-                            <div class="post-bottom clearfix d-flex align-items-center">
-                                <div class="social-share me-auto">
-                                    <button class="toggle-button icon-share"></button>
-                                    <ul class="icons list-unstyled list-inline mb-0">
-                                        <li class="list-inline-item">
-                                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="#"><i class="fab fa-twitter"></i></a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="#"><i class="fab fa-pinterest"></i></a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="#"><i class="fab fa-telegram-plane"></i></a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="#"><i class="far fa-envelope"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="more-button float-end">
-                                    <a href="#"><span class="icon-options"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
                 <div class="col-md-4 col-sm-4">
                         <div class="sidebar">
@@ -466,7 +375,7 @@
                                 </div>
                             </div>
     
-                            <div class="widget rounded">
+                            <!-- <div class="widget rounded">
                                 <div class="widget-header text-center">
                                     <h3 class="widget-title">Popular Posts</h3>
                                 </div>
@@ -544,20 +453,17 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
     
                             <div class="widget rounded">
                                 <div class="widget-header text-center">
-                                    <h3 class="widget-title">Explore Topics</h3>
+                                    <h3 class="widget-title">Category</h3>
                                 </div>
                                 <div class="widget-content">
                                     <ul class="list">
-                                        <li><a href="#">Trending</a><span>(7)</span></li>
-                                        <li><a href="#">Politics</a><span>(5)</span></li>
-                                        <li><a href="#">Fashion</a><span>(1)</span></li>
-                                        <li><a href="#">Lifestyle</a><span>(9)</span></li>
-                                        <li><a href="#">Inspiration</a><span>(2)</span></li>
-                                        <li><a href="#">Culture</a><span>(4)</span></li>
+                                        @foreach($categories as $category)
+                                        <li><a href="#">{{ $category->name }}</a><span>(7)</span></li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
