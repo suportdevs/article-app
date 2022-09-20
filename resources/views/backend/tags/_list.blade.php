@@ -19,7 +19,7 @@
         <td>{{ $dataset->firstItem() + $loop->index }}</td>
         <td>{{ $data->name }}</td>
         <td>{{ $data->slug }}</td>
-        <td>{{ Auth::guard("admin")->user()->name ?? ''}}</td>
+        <td>{{ $data->creator->username ?? ''}}</td>
         <td>{{ $data->created_at->diffForHumans() }}</td>
         <td><a href="{{ route(app()->master->routePrefix . 'tags.edit', Crypt::encrypt($data->id)) }}" class="btn btn-primary btn-sm px-1 py-1"><span class="mdi mdi-wrench"></span></a></td>
         <td><input type="checkbox" name="data[]" value="{{ $data->_key }}" class="check_item"></td>

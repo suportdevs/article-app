@@ -31,9 +31,9 @@ if(in_array(Auth::id(), master()->permitId)){
                   @can("tag_list")
                   <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/tags*') ? ' active' : '' }}" href="{{ route($routePrefix . 'tags.index') }}"><span class="icon-tag line-icon"></span> Tags</a></li>
                   @endcan
-                  @can("category_list")
+                  <!-- @can("category_list") -->
                   <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/category*') ? ' active' : '' }}" href="{{ route($routePrefix . 'category.index') }}"><span class="icon-organization line-icon"></span> Category</a></li>
-                  @endcan
+                  <!-- @endcan -->
                   @can("post_list")
                   <li class="nav-item"> <a class="nav-link {{ request()->is($urlPrefix . '/post*') ? ' active' : '' }}" href="{{ route($routePrefix . 'post.index') }}"><span class="icon-doc line-icon"></span> Posts</a></li>
                   @endcan

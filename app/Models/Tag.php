@@ -12,6 +12,11 @@ class Tag extends Model
 
     protected $fillable = ['name', 'slug', 'created_by', 'updated_by', '_key'];
 
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
     public function scopeFilter($query, $filters)
     {
         $query->when($filters->tag_name ?? false, function($query, $name){

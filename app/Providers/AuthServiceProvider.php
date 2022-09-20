@@ -33,12 +33,12 @@ class AuthServiceProvider extends ServiceProvider
             }
             return $this->hasPermission($ability);
         });
+        
     }
-        private function hasPermission($ability)
+    private function hasPermission($ability)
         {
             $permissions = Auth::user()->permission->items ?? "{}";
             $permissions = json_decode($permissions, true);
-            // dd(array_key_exists($ability, $permissions));
             return array_key_exists($ability, $permissions);
         }
 }

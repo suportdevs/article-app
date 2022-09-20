@@ -5,7 +5,7 @@
       <a href="{{ url('view-clear') }}" class="btn fs_7 p-1 btn-success" onclick="history.back()"><span class="icon-refresh"></span> Refresh</a>
     </div>
     <div class="col-md-6 text-center">
-      <h3 class="text-dark m-0"> {{ $title }} dashboard </h3>
+      <h3 class="text-dark m-0">{{ $title }}</h3>
     </div>
     <div class="col-md-3">
       <ul class="m-0" style="text-align: right;">

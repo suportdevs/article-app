@@ -6,12 +6,14 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
     public function index(Request $request)
     {
+        Gate::authorize('category_list');
         $paginateCount = $request->item_count ?? 25;
 
         $view = $request->ajax() ? 'backend.category._list' : 'backend.category.index';

@@ -7,28 +7,29 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 
 class TagController extends Controller
 {
     public function index(Request $request)
     {
+        Gate::authorize('tag_list');
         $paginateCount = $request->item_count ?? 25;
         $view = $request->ajax() ? "backend.tags._list" : "backend.tags.index";
         return view($view, [
-            'page_title' => 'Tags',
+            'page_title' => 'Tags List',
             'dataset' => Tag::filter($request)->paginate($paginateCount)
         ]);
     }
 
     public function create()
     {
-        return view('backend.tags.create', ['page_title' => "Tags"]);
+        return view('backend.tags.create', ['page_title' => "Tags Create"]);
     }
 
     public function store(Request $request)
     {
-        // dd($request->all());
         $request->validate([
             'name' => 'required|unique:tags'
         ]);

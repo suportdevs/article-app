@@ -17,7 +17,7 @@ Route::group(["prefix" => "$urlPrefix", "as" => "$routePrefix"], function() {
 
 // Category Routes
 Route::post("$urlPrefix/category/delete", [CategoryController::class, "delete"])->name($routePrefix."category.delete");
-Route::group(["prefix" => "$urlPrefix", "as" => "$routePrefix", 'middleware' => ['custom']], function() {
+Route::group(["prefix" => "$urlPrefix", "as" => "$routePrefix"], function() {
     Route::resource("/category", CategoryController::class);
 });
 

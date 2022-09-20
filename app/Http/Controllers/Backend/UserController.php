@@ -117,7 +117,7 @@ class UserController extends Controller
                 'items'     => $access
             ]);
         }
-        return redirect()->route(app()->master->routePrefix . 'users.index')->with('success', 'Record inserted successfull.');
+        return redirect()->route(app()->master->routePrefix . 'user.index')->with('success', 'Record inserted successfull.');
     }
 
     public function profile($key)
