@@ -5,7 +5,7 @@
     <a href="{{ route(app()->master->routePrefix . 'post.index') }}" class="text-sm text-dark text-decoration-none py-0 "> Post > </a>
     <a > Create</a>
   </x-breadcrumbs>
-
+  
   <x-form-error-message-component :errors="$errors" />
 
   <div class="content-wrapper p-4">
