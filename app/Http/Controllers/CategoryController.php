@@ -18,15 +18,16 @@ class CategoryController extends Controller
 
         $view = $request->ajax() ? 'backend.category._list' : 'backend.category.index';
         return view($view, [
-            'page_title'    => 'Category',
+            'page_title'    => 'Category List',
             'dataset'       => Category::filter($request)->paginate($paginateCount)
         ]);
     }
 
     public function create()
     {
+        Gate::authorize('category_create');
         return view('backend.category.create', [
-            'page_title' => 'Category'
+            'page_title' => 'Category Create'
         ]);
     }
 
@@ -55,8 +56,9 @@ class CategoryController extends Controller
 
     public function edit($id)
     {
+        Gate::authorize('category_edit');
         return view('backend.category.edit', [
-            'page_title'        => 'Category',
+            'page_title'        => 'Category Edit',
             'data'              => Category::find(decrypt($id))
         ]);
     }
@@ -68,7 +70,7 @@ class CategoryController extends Controller
         ]);
         DB::beginTransaction();
         try{
-            Category::find($id)->update([
+            Category::find(decrypt($id))->update([
                 'name'          => $request->name,
                 'slug'          => Str::slug($request->name),
                 'description'   => $request->description,
@@ -84,6 +86,7 @@ class CategoryController extends Controller
 
     public function delete(Request $request)
     {
+        Gate::authorize('category_delete');
         DB::beginTransaction();
         try{
             foreach($request->data as $key){

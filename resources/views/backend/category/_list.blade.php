@@ -18,10 +18,18 @@
         <td>{{ $data->name }}</td>
         <td>{{ $data->slug }}</td>
         <td class="text-wrap">{{ Str::words($data->description, 10, '...') }}</td>
-        <td>{{ Auth::guard("admin")->user()->name ?? ''}}</td>
+        <td>{{ $data->creator->username ?? ''}}</td>
         <td>{{ $data->created_at->diffForHumans() }}</td>
-        <td><a href="{{ route(app()->master->routePrefix . 'category.edit', Crypt::encrypt($data->id)) }}" class="btn btn-primary btn-sm px-1 py-1"><span class="mdi mdi-wrench"></span></a></td>
-        <td><input type="checkbox" name="data[]" value="{{ $data->_key }}" class="check_item"></td>
+        <td class="text-center">
+            @can("category_edit")
+            <a href="{{ route(app()->master->routePrefix . 'category.edit', Crypt::encrypt($data->id)) }}" class="btn btn-primary btn-sm px-1 py-1"><span class="mdi mdi-wrench"></span></a>
+            @endcan
+        </td>
+        <td>
+            @can("category_delete")
+            <input type="checkbox" name="data[]" value="{{ $data->_key }}" class="check_item">
+            @endcan
+        </td>
     </tr>
     @empty
     <tr class="text-center"><td colspan="8">No record found!</td></tr>

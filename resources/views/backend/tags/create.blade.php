@@ -14,8 +14,7 @@
       <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            
-            <div class="d-flex justify-content-between align-items-center mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-4">
               <div>
                 <h5 class="m-0 text-muted"><span class="fs-5 text-dark"><span class="icon-tag line-icon"></span> {{ $page_title }}</span></h5>
                 <p class="m-0">Tags Management Database</p>

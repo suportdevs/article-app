@@ -5,18 +5,23 @@
     <a class="text-sm text-dark text-decoration-none py-0 "> Category </a>
   </x-breadcrumbs>
 
+  <div class="content-wrapper p-4">
     <div class="row">
       <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
-          <div class="card-body px-3">
+          <div class="card-body p-4">
             <div class="d-flex justify-content-between align-items-center mb-4">
               <div>
-                <h5 class="m-0 text-muted"><span class="fs-5 text-dark"><span class="mdi mdi-file-document-outline"></span> Category</span> Data Table List</h5>
+                <h5 class="m-0 text-muted"><span class="fs-5 text-dark"><span class="icon-organization line-icon"></span> Category</span> Data Table List</h5>
                 <p class="m-0">Category Management Database</p>
               </div>
               <div>
+                @can("category_create")
                 <a href="{{ route(app()->master->routePrefix .'category.create') }}" class="btn btn-success btn-sm px-1 py-1"><span class="mdi mdi-plus"></span> New</a>
+                @endcan
+                @can("category_delete")
                 <button class="btn btn-danger btn-sm px-1 py-1" id="deleteMultiple" disabled><span class="mdi mdi-delete-outline"></span> Delete</button>
+                @endcan
               </div>
             </div>
             <div class="d-block">

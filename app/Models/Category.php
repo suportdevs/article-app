@@ -12,6 +12,11 @@ class Category extends Model
 
     protected $fillable = ['name', 'slug', 'description', 'created_by', 'updated_by', '_key'];
 
+    public function creator()
+    {
+        return $this->belongsTo(User::class, "created_by");
+    }
+
     public function scopeFilter($query, $filters)
     {
         $query->when($filters->category_name ?? false, function($query, $name){

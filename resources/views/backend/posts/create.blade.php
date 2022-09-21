@@ -6,24 +6,16 @@
     <a > Create</a>
   </x-breadcrumbs>
 
+  <x-form-error-message-component :errors="$errors" />
+
   <div class="content-wrapper p-4">
     <div class="row">
       <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
-          <div class="card-body">
-            @if ($errors->any())
-              <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <ul class="m-0">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div>
-            @endif
+          <div class="card-body p-4">
             <div class="d-flex justify-content-between align-items-center mb-4">
               <div>
-                <h5 class="m-0 text-muted"><span class="fs-5 text-dark"><span class="mdi mdi-file-document-outline"></span> Post</span> Create Table List</h5>
+                <h5 class="m-0 text-muted"><span class="fs-5 text-dark"><span class="icon-doc line-icon"></span> {{ $page_title }}</span></h5>
                 <p class="m-0">Post Management Database</p>
               </div>
             </div>
@@ -31,25 +23,25 @@
                 <form action="{{ route(app()->master->routePrefix . 'post.store') }}" method="POST" class="forms-sample" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label for="title" class="text-dark">Title</label>
+                        <label for="title" class="text-dark"><strong>Title</strong> <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="title" name="title" placeholder="Post title..." required>
                     </div>
                     <div class="form-group">
-                        <label for="intro" class="text-dark">Intro</label>
+                        <label for="intro" class="text-dark"><strong>Intro</strong> <span class="text-danger">*</span></label>
                         <textarea name="intro" id="intro" cols="30" rows="3" class="form-control" placeholder="Write something..." required></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="description" class="text-dark">Description</label>
+                        <label for="description" class="text-dark"><strong>Description</strong> <span class="text-danger">*</span></label>
                         <textarea name="description" id="editor" cols="80" rows="3" class="form-control" placeholder="Write something..." style="min-height: 150px;" ></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="image" class="text-dark">Fetured Image</label>
+                        <label for="image" class="text-dark"><strong>Featured Image</strong> <span class="text-danger">*</span></label>
                         <input type="file" name="image" id="image" class="form-control" required>
                     </div>
                     <div class="form-group">
                       <div class="row">
                         <div class="col-md-4">
-                          <label for="category_id" class="text-dark">Category</label>
+                          <label for="category_id" class="text-dark"><strong>Category</strong> <span class="text-danger">*</span></label>
                           <select name="category_id" id="category_id" class="form-control select2search" required>
                             <option value="">Select Category</option>
                             @foreach($categories as $id => $name)
@@ -58,7 +50,7 @@
                           </select>
                         </div>
                         <div class="col-md-4">
-                          <label for="type" class="text-dark">Type</label>
+                          <label for="type" class="text-dark"><strong>Type</strong> <span class="text-danger">*</span></label>
                           <select name="type" id="type" class="form-control select2search" required>
                             <option value="Article">Article</option>
                             <option value="News">News</option>
@@ -66,7 +58,7 @@
                           </select>
                         </div>
                         <div class="col-md-4">
-                          <label for="is_featured" class="text-dark">Is Fetured</label>
+                          <label for="is_featured" class="text-dark"><strong>Is Fetured</strong></label>
                           <select name="is_featured" id="is_featured" class="form-control select2search">
                             <option value="Featured">Yes</option>
                             <option value="Non-Featured">No</option>
@@ -77,7 +69,7 @@
                     <div class="form-group">
                       <div class="row">
                         <div class="col-md-8">
-                          <label for="tag_id" class="text-dark">Tags</label>
+                          <label for="tag_id" class="text-dark"><strong>Tags</strong> <span class="text-danger">*</span></label>
                           <select name="tag_id[]" id="tag_id" class="form-control select2search tags" multiple="multiple" required>
                             <option >Select Tags</option>
                             @foreach($tags as $id => $name)
@@ -95,7 +87,10 @@
                         </div>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-primary bg-primary">Submit</button>
+                    <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-warning">Submit</button>
+                    </div>
                 </form>
             </div>
           </div>

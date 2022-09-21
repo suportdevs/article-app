@@ -25,6 +25,7 @@ class TagController extends Controller
 
     public function create()
     {
+        Gate::authorize('tag_create');
         return view('backend.tags.create', ['page_title' => "Tags Create"]);
     }
 
@@ -57,6 +58,7 @@ class TagController extends Controller
 
     public function edit($id)
     {
+        Gate::authorize('tag_edit');
         return view('backend.tags.edit', [
             'page_title'    => 'Tags Edit',
             'data'          => Tag::find(Crypt::decrypt($id))
@@ -70,7 +72,7 @@ class TagController extends Controller
         ]);
         DB::beginTransaction();
         try{
-            Tag::find($id)->update([
+            Tag::find(decrypt($id))->update([
                 'name'          => $request->name,
                 'slug'          => Str::slug($request->name),
                 'updated_by'    => Auth::user()->id,

@@ -21,8 +21,16 @@
         <td>{{ $data->slug }}</td>
         <td>{{ $data->creator->username ?? ''}}</td>
         <td>{{ $data->created_at->diffForHumans() }}</td>
-        <td><a href="{{ route(app()->master->routePrefix . 'tags.edit', Crypt::encrypt($data->id)) }}" class="btn btn-primary btn-sm px-1 py-1"><span class="mdi mdi-wrench"></span></a></td>
-        <td><input type="checkbox" name="data[]" value="{{ $data->_key }}" class="check_item"></td>
+        <td>
+            @can("tag_edit")
+            <a href="{{ route(app()->master->routePrefix . 'tags.edit', Crypt::encrypt($data->id)) }}" class="btn btn-primary btn-sm px-1 py-1"><span class="mdi mdi-wrench"></span></a>
+            @endcan
+        </td>
+        <td>
+            @can("tag_delete")
+            <input type="checkbox" name="data[]" value="{{ $data->_key }}" class="check_item">
+            @endcan
+        </td>
     </tr>
     @empty
     <tr class="text-center"><td colspan="7">No record found!</td></tr>

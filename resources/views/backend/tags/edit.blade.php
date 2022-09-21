@@ -21,7 +21,7 @@
               </div>
             </div>
             <div class="card-content mt-4">
-                <form action="{{ route(app()->master->routePrefix . 'tags.update', $data->id ) }}" method="POST" class="forms-sample">
+                <form action="{{ route(app()->master->routePrefix . 'tags.update', Crypt::encrypt($data->id) ) }}" method="POST" class="forms-sample">
                     @csrf
                     @method('PUT')
                     <div class="form-group">

@@ -28,7 +28,7 @@ class PostController extends Controller
         $view = $request->ajax() ? 'backend.posts._list' : 'backend.posts.index';
 
         return view($view, [
-            'page_title' => 'Post',
+            'page_title' => 'Post List',
             'categories' => Category::pluck('name', 'id'),
             'tags' => Tag::pluck('name', 'id'),
             'dataset' => Post::getByUser()->filter($request)->paginate($paginateCount)
@@ -39,7 +39,7 @@ class PostController extends Controller
     {
         Gate::authorize("post_create");
         return view('backend.posts.create', [
-            'page_title' => 'Post',
+            'page_title' => 'Post Create',
             'categories' => Category::pluck('name', 'id'),
             'tags' => Tag::pluck('name', 'id')
         ]);
