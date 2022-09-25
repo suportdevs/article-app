@@ -293,12 +293,12 @@
                             <ul class="meta list-inline mb-3">
                                 <li class="list-inline-item">
                                     <a href="#">
-                                        <img src="{{ asset('images/other/author-sm.jpg') }}" class="author" alt="">
+                                        <img src="{{ asset($post->user->avatar) }}" class="author user-avatar" alt="{{ $post->user->name }}">
                                         {{ $post->user->username ?? ''}}
                                     </a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <a href="#">Finance</a>
+                                    <a href="#">{{ $post->category->name ?? ''}}</a>
                                 </li>
                                 <li class="list-inline-item">26 May 2021</li>
                             </ul>
@@ -341,6 +341,7 @@
                         </div>
                     </div>
                     @endforeach
+                    
                 </div>
                 <div class="col-md-4 col-sm-4">
                         <div class="sidebar">
@@ -471,8 +472,8 @@
                         </div>
                 </div>
                     <!-- post  -->
-                <div class="text-center">
-                        <button class="btn btn-simple">Load More</button>
+                <div class="text-center" id="ajaxPaginate">
+                    {{$posts->links() }}
                 </div>
         </div> <!-- container -->
     </section>

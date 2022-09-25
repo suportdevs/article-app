@@ -73,10 +73,6 @@ class PostController extends Controller
                     $user = User::where('role_id', 1)->get();
                     Notification::send($user, new NewPostNotification($post, 'author'));
                 }
-                //  else {
-                //     $users = User::get();
-                //     Notification::send($users, new NewPostNotification($post, 'admin'));
-                // }
 
                 DB::commit();
                 return redirect()->route(app()->master->routePrefix . 'post.index')->with('success', 'Record inserted successfully.');

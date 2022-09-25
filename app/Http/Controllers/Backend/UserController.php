@@ -3,88 +3,101 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use App\Models\UserPermission;
-use Carbon\Carbon;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
     public function index(Request $request)
     {
+        Gate::authorize("user_list");
         $item_count = $request->item_count ?? $this->getSetting();
         $view = $request->ajax() ? 'backend.users._list' : 'backend.users.index';
 
         return view($view, [
-            'page_title'    => 'Users',
+            'page_title'    => 'Users List',
             'dataset'       => User::filter($request)->orderBy('id', 'DESC')->paginate($item_count)
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show($id)
     {
-        //
+        Gate::authorize("user_show");
+        return view("backend.users.show", [
+            'page_title'    => "User Details",
+            'data'          => User::find(decrypt($id))
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
+        Gate::authorize("user_edit");
         return view("backend.users.edit", [
             'page_title'    => "User Edit",
             'data'          => User::find(decrypt($id))
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
-        //
+        try{
+            DB::beginTransaction();
+            $user = User::find(decrypt($id));
+            $imageUrl = '';
+            if($request->hasFile('avatar')){
+                if($request->file('avatar') != '' && !empty($user->avatar)){
+                    unlink($user->avatar);
+                }
+                $fileName = hexdec(uniqid());
+                $extension = $request->file('avatar')->getClientOriginalExtension();
+                $finalName = $fileName . '_' . time() . '.' . $extension;
+
+                $imageUrl = 'user/avatar/' . $finalName;
+                
+                $attributes = $request->validated();
+                $attributes['avatar']       = $imageUrl ?? 'user/avatar/default.png';
+                $attributes['slug']         = Str::slug($request->username);
+                $attributes['locale']       = $request->locale;
+                $attributes['updated_by']   = Auth::user()->id;
+                $attributes['_key']         = Str::random(32);
+                $user->update($attributes);
+
+                Image::make($request->file('avatar'))->resize(250, 200)->save(public_path('user/avatar/') . $finalName);
+                
+            } else {
+                $attributes = $request->validated();
+                $attributes['slug']         = Str::slug($request->username);
+                $attributes['locale']       = $request->locale;
+                $attributes['updated_by']   = Auth::user()->id;
+                $attributes['_key']         = Str::random(32);
+                $user->update($attributes);
+            }
+
+            DB::commit();
+            return redirect()->route(app()->master->routePrefix . 'user.index')->with('success', 'Record inserted successfully.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', $e->getMessage());
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

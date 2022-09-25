@@ -53,8 +53,8 @@
               </div>
             </form>
           </div>
-          <div class="text-center mx-auto">
-          {{ $dataset->links() }}
+          <div class="text-center mx-auto" id="ajaxPaginate">
+            {{ $dataset->links() }}
           </div>
         </div>
       </div>

@@ -2061,7 +2061,9 @@ code {
 .featured-post-lg:hover .thumb .inner {
     transform: scale(1.05);
 }
-
+.post img.author.user-avatar {
+    width: 25px;
+}
 .featured-post-lg .thumb {
     position: relative;
     overflow: hidden;

@@ -13,7 +13,7 @@ class HomeController extends Controller
     {
         return view('fontend.home', [
             'categories'        => Category::all(),
-            'posts'             => Post::with('user', 'category')->latest()->take(10)->get(),
+            'posts'             => Post::with('user', 'category')->latest()->paginate(10),
         ]);
     }
 }
