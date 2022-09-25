@@ -12,6 +12,9 @@ use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
+$urlPrefix = app()->master->urlPrefix;
+$routePrefix = app()->master->routePrefix;
+
 Route::group(['prefix' => 'admin'], function () {
     Route::get('register', [RegisteredUserController::class, 'create'])->middleware('adminGuest')
                 ->name('admin.register');
@@ -57,11 +60,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin:admin'], function () {
                 ->name('admin.logout');
 });
 
-Route::post("suportdevs/users/delete", [SubscriberController::class, "delete"])->name("suportdevs.users.delete");
-Route::group(['prefix' => 'suportdevs', 'as' => 'suportdevs.'], function() {
+Route::post("$urlPrefix/users/delete", [SubscriberController::class, "delete"])->name($routePrefix ."users.delete");
+Route::group(["prefix" => "$urlPrefix", "as" => "$routePrefix"], function() {
     Route::get("/user/{key}/access", [UserController::class, "access"])->name("user.access");
     Route::post("/user/{id}/access", [UserController::class, "saveAccess"])->name("user.access.store");
     Route::resource('/user', UserController::class);
-    Route::get('/profile-update', [UserProfileController::class, 'profileUpdate'])->name('suportdevs.profile-update');
+    Route::get('/profile-update', [UserProfileController::class, 'profileUpdate'])->name('profile-update');
     Route::resource('/profile', UserProfileController::class);
 });

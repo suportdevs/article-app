@@ -3,6 +3,7 @@
 use App\Http\Controllers\Fontend\HomeController;
 use App\Services\MasterAppServiceProvider;
 use App\Traits\Master;
+use Example\Controllers\ExampleController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -25,4 +26,7 @@ Route::get($urlPrefix .'/dashboard', function () {
     return view('backend.dashboard');
 })->middleware(['auth'])->name($routePrefix.'dashboard');
 
+Route::get('/example', [ExampleController::class, 'index']);
+
 require __DIR__.'/auth.php';
+

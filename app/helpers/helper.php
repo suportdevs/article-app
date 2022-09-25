@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Controller;
-use App\Services\MasterAppServiceProvider;
 use Illuminate\Support\Facades\Auth;
 
 function pr($object, $exit = true) {
