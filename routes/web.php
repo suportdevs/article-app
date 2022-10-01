@@ -1,13 +1,10 @@
 <?php
 
 use App\Http\Controllers\Fontend\HomeController;
-use App\Services\MasterAppServiceProvider;
-use App\Traits\Master;
 use Example\Controllers\ExampleController;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-// dd(auth()->user());
+
 $urlPrefix = master()->urlPrefix;
 $routePrefix = master()->routePrefix;
 
