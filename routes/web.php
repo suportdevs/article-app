@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\Route;
 $urlPrefix = master()->urlPrefix;
 $routePrefix = master()->routePrefix;
 
-// dd(master());
-
 //Clear View cache:
 Route::get('/view-clear', function () {
     Artisan::call('view:clear');
