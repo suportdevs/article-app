@@ -348,7 +348,7 @@
                             <div class="widget rounded">
                                 <div class="widget-about text-center">
                                     <img src="images/logo.svg" alt="" class="logo">
-                                    <p class="mb-4" style="text-align: justify;">This is Lorem ipsum dolor sit amet
+                                    <p class="mb-4" style="text-align: justify">This is Lorem ipsum dolor sit amet
                                         consectetur adipisicing elit.
                                         Dolores tempora accusantium culpa deleniti nesciunt repellat quisquam quos vero.
                                         Esse itaque est optio nostrum porro quisquam nihil reprehenderit fugiat enim
@@ -480,9 +480,6 @@
     
     <!--====== ABOUT PART ENDS ======-->
 
-    
-    <!--====== ABOUT PART ENDS ======-->
-    
     <!--====== VIDEO COUNTER PART START ======-->
     
     <section id="facts" class="video-counter pt-70">
