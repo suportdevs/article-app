@@ -819,7 +819,6 @@
     </section>
     
     <!--====== BLOG PART ENDS ======-->
-    
     <!--====== FOOTER PART START ======-->
     
     <footer id="footer" class="footer-area pt-120">
