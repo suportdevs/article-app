@@ -95,8 +95,6 @@ class PostController extends Controller
 
             Image::make($request->file('upload'))->resize(1600, 1066)->save(public_path('media/') . $finalName);
 
-            // $request->file('upload')->move(public_path('media/'), $finalName);
-
             $url = asset('media/'.$finalName);
 
             return response()->json(['fileName' => $fileName, 'uploaded' => 1, 'url' => $url]);
