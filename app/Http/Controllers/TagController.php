@@ -18,8 +18,8 @@ class TagController extends Controller
         $paginateCount = $request->item_count ?? 25;
         $view = $request->ajax() ? "backend.tags._list" : "backend.tags.index";
         return view($view, [
-            'page_title' => 'Tags List',
-            'dataset' => Tag::filter($request)->paginate($paginateCount)
+            'page_title'    => 'Tags List',
+            'dataset'       => Tag::filter($request)->paginate($paginateCount)
         ]);
     }
 
